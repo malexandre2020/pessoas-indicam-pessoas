@@ -706,13 +706,12 @@ function renderServCats() {
   PROFESSIONALS.forEach(p => { counts[p.cat] = (counts[p.cat]||0)+1; });
   const cats = ["Todos", ...[...new Set(PROFESSIONALS.map(p=>p.cat))].sort()];
   const sel = document.getElementById("cats-serv");
-  const cur = sel.value || activeServCat;
   sel.innerHTML = cats.map(c => {
     const count = c==="Todos" ? PROFESSIONALS.length : (counts[c]||0);
-    return `<option value="${c}"${c===cur?" selected":""}>${c} (${count})</option>`;
+    return `<option value="${c}"${c===activeServCat?" selected":""}>${c} (${count})</option>`;
   }).join("");
   const badge = document.getElementById("badge-serv");
-  badge.textContent = activeServCat==="Todos" ? PROFESSIONALS.length+" profissionais" : counts[activeServCat]+" encontrados";
+  badge.textContent = activeServCat==="Todos" ? PROFESSIONALS.length+" profissionais" : (counts[activeServCat]||0)+" encontrados";
 }
 
 function setServCat(cat) { activeServCat=cat; renderServCats(); filterServ(); }
@@ -757,14 +756,13 @@ function renderMedCats() {
   DOCTORS.forEach(d => { counts[d.spec]=(counts[d.spec]||0)+1; });
   const cats = ["Todos",...[...new Set(DOCTORS.map(d=>d.spec))].sort()];
   const sel = document.getElementById("cats-med");
-  const cur = sel.value || activeMedCat;
   sel.innerHTML = cats.map(c => {
     const count = c==="Todos" ? DOCTORS.length : (counts[c]||0);
     const label = c==="Todos" ? "Todas as especialidades" : c;
-    return `<option value="${c}"${c===cur?" selected":""}>${label} (${count})</option>`;
+    return `<option value="${c}"${c===activeMedCat?" selected":""}>${label} (${count})</option>`;
   }).join("");
   const badge = document.getElementById("badge-med");
-  badge.textContent = activeMedCat==="Todos" ? DOCTORS.length+" especialistas" : counts[activeMedCat]+" encontrados";
+  badge.textContent = activeMedCat==="Todos" ? DOCTORS.length+" especialistas" : (counts[activeMedCat]||0)+" encontrados";
 }
 
 function setMedCat(cat) { activeMedCat=cat; renderMedCats(); filterMed(); }
@@ -823,7 +821,7 @@ function renderEmpCats() {
     return `<option value="${c}"${c===activeEmpCat?" selected":""}>${c} (${count})</option>`;
   }).join("");
   const badge = document.getElementById("badge-emp");
-  badge.textContent = activeEmpCat==="Todos" ? ENTREPRENEURS.length+" empreendedores" : counts[activeEmpCat]+" encontrados";
+  badge.textContent = activeEmpCat==="Todos" ? ENTREPRENEURS.length+" empreendedores" : (counts[activeEmpCat]||0)+" encontrados";
 }
 
 function setEmpCat(cat) { activeEmpCat=cat; renderEmpCats(); filterEmp(); }
