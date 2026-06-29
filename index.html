@@ -603,7 +603,7 @@ const DOCTORS = [
 
 /* ═══ ENTREPRENEURS DATA ═══ */
 const ENTREPRENEURS = [
-  { name:"Lastro D'Ouro", service:"Pães e Caldos Caseiros – Receitas caseiras desde 2019", phone:"(11) 97871-6452", cat:"Alimentação", address:"", instagram:"https://www.instagram.com/lastrodouro" },
+  { name:"Lastro D'Ouro", service:"Pães e Caldos Caseiros – Receitas caseiras desde 2019", phone:"(11) 97871-6452", cat:"Alimentação", address:"", instagram:"https://www.instagram.com/lastrodouro", logo:"lastro-douro.png" },
 ];
 
 /* ═══ COLORS ═══ */
@@ -848,7 +848,7 @@ function filterEmp() {
     const rid = slugify(e.name); const rv = getRating(rid);
     return `<article class="card" role="listitem">
       <div class="card-top">
-        <div class="avatar" style="background:${av.bg};color:${av.text}">${initials(e.name)}</div>
+        ${e.logo ? `<img src="${e.logo}" alt="${e.name}" style="width:42px;height:42px;border-radius:8px;object-fit:cover;flex-shrink:0;">` : `<div class="avatar" style="background:${av.bg};color:${av.text}">${initials(e.name)}</div>`}
         <div class="card-meta">
           <div class="card-name">${e.name}</div>
           <div class="card-service">${e.service}${e.address?` · ${e.address}`:""}</div>
