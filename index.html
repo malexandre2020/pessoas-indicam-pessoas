@@ -922,32 +922,38 @@ function filterEmp() {
     grid.innerHTML=`<div class="empty"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><p>${ENTREPRENEURS.length===0?"Nenhum empreendedor cadastrado ainda. Seja o primeiro a indicar!":"Nenhum empreendedor encontrado."}</p></div>`;
     return;
   }
-  grid.innerHTML = filtered.map((e,i) => {
+  const fragment = document.createDocumentFragment();
+  filtered.forEach((e,i) => {
     const av = AVATARS[i%AVATARS.length];
     const cc = EMP_CAT_COLORS[e.cat]||{bg:"#F1EFE8",text:"#5F5E5A"};
     const digits = (e.phone||"").replace(/\D/g,"");
     const rid = slugify(e.name); const rv = getRating(rid);
-    return `<article class="card" role="listitem">
-      ${e.logo ? `<img src="${e.logo}" alt="${e.name}" style="display:block;width:calc(100% + 2rem);max-width:calc(100% + 2rem);height:80px;object-fit:contain;background:#fff;border-radius:8px 8px 0 0;margin:-1rem -1rem .85rem -1rem;">` : ""}
-      <div class="card-top">
-        ${e.logo ? `` : `<div class="avatar" style="background:${av.bg};color:${av.text}">${initials(e.name)}</div>`}
-        <div class="card-meta">
-          <div class="card-name">${e.name}</div>
-          <div class="card-service">${e.service}${e.address?` · ${e.address}`:""}</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:3px">${e.instagram?`<a href="${e.instagram}" target="_blank" rel="noopener" style="font-size:11px;color:#E1306C;display:inline-flex;align-items:center;gap:4px;text-decoration:none;font-weight:500"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#E1306C" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C" stroke="none"/></svg>Instagram</a>`:""} ${e.site?`<a href="${e.site}" target="_blank" rel="noopener" style="font-size:11px;color:var(--accent);display:inline-flex;align-items:center;gap:4px;text-decoration:none;font-weight:500"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Site</a>`:""}</div>
-        </div>
-        <span class="cat-tag" style="background:${cc.bg};color:${cc.text}">${e.cat}</span>
-      </div>
-      <div class="stars-row">
-        <span class="stars" data-rid="${rid}" data-name="${e.name.replace(/"/g,'&quot;')}" data-type="emp" onclick="openModal(this.dataset.rid,this.dataset.name,this.dataset.type)" title="Clique para avaliar">${starsHtml(rv.avg)}</span>
-        ${rv.count>0?`<span class="rating-avg">${rv.avg.toFixed(1)}</span><span class="rating-info">(${rv.count} avaliação${rv.count>1?"ões":""})</span>`:`<span class="rating-info">Seja o primeiro a avaliar</span>`}
-      </div>
-      <div class="card-footer">
-        <div class="card-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>${e.phone||"Sem telefone"}</div>
-        ${digits.length>=8?`<a class="wpp-link" href="https://wa.me/55${digits}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#1A7340"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>WhatsApp</a>`:""}
-      </div>
-    </article>`;
-  }).join("");
+    const article = document.createElement("article");
+    article.className = "card"; article.setAttribute("role","listitem");
+    if(e.logo){ const img=document.createElement("img"); img.src=e.logo; img.alt=e.name; img.style.cssText="display:block;width:calc(100% + 2rem);max-width:calc(100% + 2rem);height:80px;object-fit:contain;background:#fff;border-radius:8px 8px 0 0;margin:-1rem -1rem .85rem -1rem;"; article.appendChild(img); }
+    const cardTop=document.createElement("div"); cardTop.className="card-top";
+    if(!e.logo){ const av2=document.createElement("div"); av2.className="avatar"; av2.style.cssText=`background:${av.bg};color:${av.text}`; av2.textContent=initials(e.name); cardTop.appendChild(av2); }
+    const meta=document.createElement("div"); meta.className="card-meta";
+    const nd=document.createElement("div"); nd.className="card-name"; nd.textContent=e.name; meta.appendChild(nd);
+    const sd=document.createElement("div"); sd.className="card-service"; sd.textContent=e.service+(e.address?" · "+e.address:""); meta.appendChild(sd);
+    if(e.instagram||e.site){ const ld=document.createElement("div"); ld.style.cssText="display:flex;gap:8px;flex-wrap:wrap;margin-top:3px"; if(e.instagram){const a=document.createElement("a");a.href=e.instagram;a.target="_blank";a.rel="noopener";a.style.cssText="font-size:11px;color:#E1306C;display:inline-flex;align-items:center;gap:4px;text-decoration:none;font-weight:500";a.innerHTML='<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#E1306C" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C" stroke="none"/></svg>Instagram';ld.appendChild(a);} if(e.site){const a=document.createElement("a");a.href=e.site;a.target="_blank";a.rel="noopener";a.style.cssText="font-size:11px;color:var(--accent);display:inline-flex;align-items:center;gap:4px;text-decoration:none;font-weight:500";a.innerHTML='<svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Site';ld.appendChild(a);} meta.appendChild(ld); }
+    const ct=document.createElement("span"); ct.className="cat-tag"; ct.style.cssText=`background:${cc.bg};color:${cc.text}`; ct.textContent=e.cat;
+    cardTop.appendChild(meta); cardTop.appendChild(ct); article.appendChild(cardTop);
+    const sr=document.createElement("div"); sr.className="stars-row";
+    const ss=document.createElement("span"); ss.className="stars"; ss.title="Clique para avaliar"; ss.innerHTML=starsHtml(rv.avg);
+    ss.addEventListener("click", (function(r,n){ return function(){ openModal(r,n,"emp"); }; })(rid, e.name));
+    sr.appendChild(ss);
+    if(rv.count>0){ const ra=document.createElement("span"); ra.className="rating-avg"; ra.textContent=rv.avg.toFixed(1); const rc=document.createElement("span"); rc.className="rating-info"; rc.textContent="("+rv.count+" avaliação"+(rv.count>1?"ões":"")+")"; sr.appendChild(ra); sr.appendChild(rc); }
+    else { const rf=document.createElement("span"); rf.className="rating-info"; rf.textContent="Seja o primeiro a avaliar"; sr.appendChild(rf); }
+    article.appendChild(sr);
+    const foot=document.createElement("div"); foot.className="card-footer";
+    const ph=document.createElement("div"); ph.className="card-phone"; ph.innerHTML='<svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>'+(e.phone||"Sem telefone"); foot.appendChild(ph);
+    if(digits.length>=8){ const wa=document.createElement("a"); wa.className="wpp-link"; wa.href="https://wa.me/55"+digits; wa.target="_blank"; wa.rel="noopener"; wa.innerHTML='<svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#1A7340"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>WhatsApp'; foot.appendChild(wa); }
+    article.appendChild(foot);
+    fragment.appendChild(article);
+  });
+  grid.innerHTML = "";
+  grid.appendChild(fragment);
 }
 
 async function submitForm(e, type) {
