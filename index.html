@@ -699,43 +699,48 @@ function submitForm(e, type) {
 
 /* ── RATINGS (JSONBin.io — compartilhado entre todos os visitantes) ── */
 const JSONBIN_ID  = "6a41cf8eda38895dfe0daa17";
-const JSONBIN_KEY = "$2a$10$OWfq4s3el1vzEdgGvjmPMuczcrrLxYlbOSbnlfO9sARLB7FJ2FEGS";
+const JSONBIN_MASTER = "$2a$10$0iEsZmH.rUreUjYTogdHE.d506NJSqtk6jGhkm5aPO4JHuTCuIQdm";
 const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
 
-let ratingsCache = null;   // cache local para não bater na API a cada render
-let ratingsDirty = false;  // indica se há mudança pendente para salvar
+let ratingsCache = null;
 
 async function loadRatings(){
-  if(ratingsCache) return ratingsCache;
+  // Sempre busca do servidor — nunca usa cache para garantir dados atualizados
   try {
     const r = await fetch(`${JSONBIN_URL}/latest`, {
-      headers: { "X-Access-Key": JSONBIN_KEY }
+      headers: { "X-Master-Key": JSONBIN_MASTER }
     });
+    if(!r.ok) { console.error("JSONBin leitura erro:", r.status, await r.text()); ratingsCache = {}; return ratingsCache; }
     const json = await r.json();
     ratingsCache = json.record?.ratings || {};
   } catch(e){
+    console.error("JSONBin leitura falhou:", e);
     ratingsCache = {};
   }
   return ratingsCache;
 }
 
 async function saveRatingRemote(id, value){
-  const data = await loadRatings();
+  // Busca dados frescos do servidor antes de salvar para não sobrescrever avaliações de outros
+  await loadRatings();
+  const data = ratingsCache;
   const cur  = data[id] || {avg:0, count:0};
   const newCount = cur.count + 1;
   const newAvg   = (cur.avg * cur.count + value) / newCount;
   data[id] = {avg: newAvg, count: newCount};
   ratingsCache = data;
   try {
-    await fetch(JSONBIN_URL, {
+    const r = await fetch(JSONBIN_URL, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "X-Access-Key": JSONBIN_KEY
+        "X-Master-Key": JSONBIN_MASTER
       },
       body: JSON.stringify({ ratings: data })
     });
-  } catch(e){ console.warn("Erro ao salvar avaliação:", e); }
+    if(!r.ok) { console.error("JSONBin escrita erro:", r.status, await r.text()); }
+    else { console.log("Avaliação salva com sucesso:", id, value); }
+  } catch(e){ console.error("JSONBin escrita falhou:", e); }
   return data[id];
 }
 
