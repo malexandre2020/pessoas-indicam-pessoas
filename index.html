@@ -51,6 +51,10 @@
   .btn-indicar:hover { background: #175c35; }
   .btn-indicar svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
+  /* HERO COLLAPSE */
+  .hero { transition: max-height .35s ease, padding .35s ease, opacity .3s ease; overflow: hidden; }
+  .hero.collapsed { max-height: 0 !important; padding-top: 0 !important; padding-bottom: 0 !important; opacity: 0; }
+
   /* SECTION TABS */
   .section-tabs { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 99; }
   .tabs-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; display: flex; gap: 0; }
@@ -564,6 +568,20 @@ function initials(name) {
 }
 
 /* ── SECTION SWITCH ── */
+function initHeroCollapse() {
+  const heroes = document.querySelectorAll(".hero");
+  let lastY = 0;
+  window.addEventListener("scroll", () => {
+    const y = window.scrollY;
+    if (y > 80) {
+      heroes.forEach(h => h.classList.add("collapsed"));
+    } else {
+      heroes.forEach(h => h.classList.remove("collapsed"));
+    }
+    lastY = y;
+  }, { passive: true });
+}
+
 function fixStickyTabs() {
   const h = document.querySelector("header").offsetHeight;
   document.querySelector(".section-tabs").style.top = h + "px";
@@ -846,6 +864,7 @@ function updateModalStars(v){
 document.addEventListener("DOMContentLoaded", function(){
   fixStickyTabs();
   window.addEventListener('resize', fixStickyTabs);
+  initHeroCollapse();
   // Init stats and categories
   const servCats = [...new Set(PROFESSIONALS.map(p=>p.cat))];
   const medCats  = [...new Set(DOCTORS.map(d=>d.spec))];
