@@ -683,18 +683,58 @@ function filterMed() {
   }).join("");
 }
 
-function submitForm(e, type) {
+async function submitForm(e, type) {
   e.preventDefault();
   const prefix = type==="serv" ? "s" : "m";
   const nome = document.getElementById(prefix+"-nome").value.trim();
   const tel  = document.getElementById(type==="serv" ? "s-cel" : "m-tel").value.trim();
   const cat  = document.getElementById(type==="serv" ? "s-cat" : "m-esp").value;
-  const serv = type==="serv" ? document.getElementById("s-serv").value.trim() : "ok";
-  if (!nome || !tel || !cat || !serv) { alert("Por favor, preencha todos os campos obrigatórios."); return; }
-  document.getElementById("form-"+type).style.display = "none";
-  const succ = document.getElementById("succ-"+type);
-  succ.classList.add("visible");
-  succ.scrollIntoView({behavior:"smooth",block:"center"});
+  const serv = type==="serv" ? document.getElementById("s-serv").value.trim() : "";
+  const obs  = document.getElementById(type==="serv" ? "s-obs" : "m-obs").value.trim();
+  const end  = type==="med" ? document.getElementById("m-end").value.trim() : "";
+  if (!nome || !tel || !cat || (type==="serv" && !serv)) { alert("Por favor, preencha todos os campos obrigatórios."); return; }
+
+  const btn = e.target.querySelector(".btn-submit");
+  const btnText = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = btn.innerHTML.replace(/>Enviar indicação</, ">Enviando…<");
+
+  // Monta mensagem para o Formspree
+  const formData = new FormData();
+  formData.append("_subject", type==="serv" ? `Nova indicação: ${nome}` : `Nova indicação médico: ${nome}`);
+  formData.append("Nome", nome);
+  formData.append("Telefone", tel);
+  if(type==="serv") {
+    formData.append("Serviço", serv);
+    formData.append("Categoria", cat);
+  } else {
+    formData.append("Especialidade", cat);
+    if(end) formData.append("Endereço", end);
+  }
+  if(obs) formData.append("Observações", obs);
+  formData.append("Tipo", type==="serv" ? "Prestador de serviço" : "Médico/Especialista");
+
+  try {
+    const r = await fetch("https://formspree.io/f/mbdvkjqj", {
+      method: "POST",
+      body: formData,
+      headers: { "Accept": "application/json" }
+    });
+    if(r.ok) {
+      document.getElementById("form-"+type).style.display = "none";
+      const succ = document.getElementById("succ-"+type);
+      succ.classList.add("visible");
+      succ.scrollIntoView({behavior:"smooth",block:"center"});
+    } else {
+      btn.disabled = false;
+      btn.innerHTML = btnText;
+      alert("Erro ao enviar. Tente novamente.");
+    }
+  } catch(err) {
+    btn.disabled = false;
+    btn.innerHTML = btnText;
+    alert("Erro de conexão. Tente novamente.");
+  }
 }
 
 /* ── RATINGS (JSONBin.io — compartilhado entre todos os visitantes) ── */
