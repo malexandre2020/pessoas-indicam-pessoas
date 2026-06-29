@@ -259,8 +259,8 @@
       </div>
       <form class="indicar-form" id="form-serv" onsubmit="submitForm(event,'serv')" novalidate>
         <div class="form-row">
-          <div class="field"><label for="s-nome">Nome *</label><input type="text" id="s-nome" placeholder="Ex: João Silva" required></div>
-          <div class="field"><label for="s-cel">Celular *</label><input type="tel" id="s-cel" placeholder="(11) 99999-9999" required></div>
+          <div class="field"><label for="s-nome">Nome do profissional *</label><input type="text" id="s-nome" placeholder="Ex: João Silva" required></div>
+          <div class="field"><label for="s-cel">Celular do profissional *</label><input type="tel" id="s-cel" placeholder="(11) 99999-9999" required></div>
         </div>
         <div class="form-row">
           <div class="field"><label for="s-serv">Serviço *</label><input type="text" id="s-serv" placeholder="Ex: Eletricista, Pintor…" required></div>
@@ -275,6 +275,10 @@
               <option>Tapeçaria</option><option>Transporte</option><option>Vidraçaria</option><option>Outro</option>
             </select>
           </div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="s-indicador">Seu nome (quem indica) *</label><input type="text" id="s-indicador" placeholder="Ex: Maria Souza" required></div>
+          <div class="field"><label for="s-indicador-tel">Seu telefone (opcional)</label><input type="tel" id="s-indicador-tel" placeholder="(11) 99999-9999"></div>
         </div>
         <div class="field"><label for="s-obs">Observações (opcional)</label><textarea id="s-obs" placeholder="Por que você indica? Endereço, redes sociais…"></textarea></div>
         <p class="form-note">* Campos obrigatórios. Indicações são revisadas antes de serem publicadas.</p>
@@ -329,6 +333,10 @@
             </select>
           </div>
           <div class="field"><label for="m-end">Endereço (opcional)</label><input type="text" id="m-end" placeholder="Rua, bairro…"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="m-indicador">Seu nome (quem indica) *</label><input type="text" id="m-indicador" placeholder="Ex: Maria Souza" required></div>
+          <div class="field"><label for="m-indicador-tel">Seu telefone (opcional)</label><input type="tel" id="m-indicador-tel" placeholder="(11) 99999-9999"></div>
         </div>
         <div class="field"><label for="m-obs">Por que indica? (opcional)</label><textarea id="m-obs" placeholder="Conte sua experiência, site, redes sociais…"></textarea></div>
         <p class="form-note">* Campos obrigatórios. Indicações são revisadas antes de serem publicadas.</p>
@@ -692,7 +700,9 @@ async function submitForm(e, type) {
   const serv = type==="serv" ? document.getElementById("s-serv").value.trim() : "";
   const obs  = document.getElementById(type==="serv" ? "s-obs" : "m-obs").value.trim();
   const end  = type==="med" ? document.getElementById("m-end").value.trim() : "";
-  if (!nome || !tel || !cat || (type==="serv" && !serv)) { alert("Por favor, preencha todos os campos obrigatórios."); return; }
+  const indicador = document.getElementById(type==="serv" ? "s-indicador" : "m-indicador").value.trim();
+  const indicadorTel = document.getElementById(type==="serv" ? "s-indicador-tel" : "m-indicador-tel").value.trim();
+  if (!nome || !tel || !cat || (type==="serv" && !serv) || !indicador) { alert("Por favor, preencha todos os campos obrigatórios."); return; }
 
   const btn = e.target.querySelector(".btn-submit");
   const btnText = btn.innerHTML;
@@ -712,6 +722,8 @@ async function submitForm(e, type) {
     if(end) formData.append("Endereço", end);
   }
   if(obs) formData.append("Observações", obs);
+  formData.append("Indicado por", indicador);
+  if(indicadorTel) formData.append("Telefone de quem indica", indicadorTel);
   formData.append("Tipo", type==="serv" ? "Prestador de serviço" : "Médico/Especialista");
 
   try {
