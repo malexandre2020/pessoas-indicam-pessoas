@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Diretório de profissionais recomendados por quem já contratou. Encontre prestadores de serviço de confiança em São Paulo.">
+<meta property="og:title" content="Pessoas Indicam Pessoas">
+<meta property="og:description" content="Profissionais recomendados por quem já contratou.">
+<title>Pessoas Indicam Pessoas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #F7F6F3;
+    --surface: #FFFFFF;
+    --border: #E4E2DC;
+    --border-strong: #C8C5BC;
+    --text-primary: #1A1917;
+    --text-secondary: #5C5A55;
+    --text-muted: #9C9A95;
+    --accent: #1D6B3E;
+    --accent-bg: #EAF4EE;
+    --accent-border: #A8D5B5;
+    --accent-text: #145530;
+    --radius: 10px;
+    --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .header-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: 1rem 1.25rem;
+    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-icon {
+    width: 38px; height: 38px; border-radius: 9px;
+    background: var(--accent-bg); border: 1px solid var(--accent-border);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 2; }
+  .logo-text { font-size: 15px; font-weight: 600; color: var(--text-primary); }
+  .logo-text span { color: var(--accent); }
+  .header-search {
+    flex: 1; min-width: 200px;
+    position: relative;
+  }
+  .header-search svg {
+    position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
+    width: 16px; height: 16px; stroke: var(--text-muted); fill: none; stroke-width: 2;
+    pointer-events: none;
+  }
+  .header-search input {
+    width: 100%; padding: 9px 12px 9px 36px;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--bg); color: var(--text-primary);
+    font-size: 14px; font-family: inherit; outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .header-search input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(29,107,62,.12);
+  }
+  .header-search input::placeholder { color: var(--text-muted); }
+
+  .btn-indicar {
+    flex-shrink: 0;
+    background: var(--accent); color: #fff;
+    border: none; border-radius: var(--radius);
+    padding: 9px 16px; font-size: 14px; font-weight: 500;
+    font-family: inherit; cursor: pointer;
+    text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    transition: background .15s;
+  }
+  .btn-indicar:hover { background: #175c35; }
+  .btn-indicar svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, #1D6B3E 0%, #145530 100%);
+    color: #fff; text-align: center; padding: 3rem 1.25rem;
+  }
+  .hero h1 { font-size: 2rem; font-weight: 600; margin-bottom: .5rem; line-height: 1.25; }
+  .hero p { font-size: 1rem; opacity: .85; max-width: 480px; margin: 0 auto 1.5rem; }
+  .hero-stats {
+    display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
+  }
+  .hero-stat { text-align: center; }
+  .hero-stat-num { font-size: 1.5rem; font-weight: 600; }
+  .hero-stat-label { font-size: 12px; opacity: .7; margin-top: 2px; }
+
+  /* ── CATEGORIES ── */
+  .cats-bar {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    overflow-x: auto; scrollbar-width: none;
+  }
+  .cats-bar::-webkit-scrollbar { display: none; }
+  .cats-inner {
+    max-width: 1100px; margin: 0 auto;
+    padding: .6rem 1.25rem;
+    display: flex; gap: 6px;
+  }
+  .cat-btn {
+    flex-shrink: 0; border: 1px solid var(--border);
+    background: transparent; border-radius: 20px;
+    padding: 5px 14px; font-size: 13px; font-weight: 500;
+    cursor: pointer; color: var(--text-secondary);
+    display: flex; align-items: center; gap: 5px;
+    transition: all .15s; font-family: inherit;
+  }
+  .cat-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .cat-btn.active {
+    background: var(--accent-bg); border-color: var(--accent-border);
+    color: var(--accent-text);
+  }
+  .cat-btn .count {
+    background: var(--border); color: var(--text-muted);
+    border-radius: 20px; padding: 0 6px; font-size: 11px;
+  }
+  .cat-btn.active .count {
+    background: var(--accent-border); color: var(--accent-text);
+  }
+
+  /* ── MAIN ── */
+  .main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; }
+
+  .results-info {
+    font-size: 13px; color: var(--text-muted);
+    margin-bottom: 1rem;
+  }
+  .results-info strong { color: var(--text-secondary); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 12px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1rem;
+    box-shadow: var(--shadow);
+    transition: box-shadow .15s, border-color .15s;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .card:hover { box-shadow: var(--shadow-md); border-color: var(--border-strong); }
+
+  .card-top { display: flex; align-items: flex-start; gap: 10px; }
+  .avatar {
+    width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600; letter-spacing: -.5px;
+  }
+  .card-meta { flex: 1; min-width: 0; }
+  .card-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .card-service { font-size: 12px; color: var(--text-secondary); margin-top: 2px; line-height: 1.4; }
+  .cat-tag {
+    font-size: 11px; font-weight: 500; padding: 3px 9px;
+    border-radius: 20px; flex-shrink: 0; white-space: nowrap;
+  }
+
+  .card-footer {
+    border-top: 1px solid var(--border); padding-top: 10px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .card-phone {
+    flex: 1; font-size: 13px; color: var(--text-secondary);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .card-phone svg { width: 14px; height: 14px; stroke: var(--text-muted); fill: none; stroke-width: 2; flex-shrink: 0; }
+
+  .wpp-link {
+    flex-shrink: 0; display: inline-flex; align-items: center; gap: 5px;
+    background: #E7F8EE; color: #1A7340; border: 1px solid #A8D5B5;
+    border-radius: 7px; padding: 5px 11px; font-size: 12px; font-weight: 500;
+    text-decoration: none; transition: background .15s;
+  }
+  .wpp-link:hover { background: #d0f0de; }
+  .wpp-link svg { width: 14px; height: 14px; fill: #1A7340; }
+
+  /* ── EMPTY ── */
+  .empty {
+    grid-column: 1 / -1; text-align: center;
+    padding: 3rem 1rem; color: var(--text-muted);
+  }
+  .empty svg { width: 40px; height: 40px; stroke: var(--border-strong); fill: none; stroke-width: 1.5; margin-bottom: .75rem; }
+  .empty p { font-size: 14px; }
+
+  /* ── INDICAR SECTION ── */
+  .indicar-section {
+    margin-top: 2rem; background: var(--surface);
+    border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden;
+  }
+  .indicar-header {
+    background: var(--accent-bg); border-bottom: 1px solid var(--accent-border);
+    padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 12px;
+  }
+  .indicar-header svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 2; flex-shrink: 0; }
+  .indicar-header h2 { font-size: 16px; font-weight: 600; color: var(--accent-text); }
+  .indicar-header p { font-size: 13px; color: var(--accent-text); opacity: .75; }
+
+  .indicar-form { padding: 1.5rem; display: grid; gap: 12px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 540px) { .form-row { grid-template-columns: 1fr; } }
+
+  .field { display: flex; flex-direction: column; gap: 5px; }
+  .field label { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+  .field input, .field select, .field textarea {
+    width: 100%; padding: 9px 12px;
+    border: 1px solid var(--border); border-radius: var(--radius);
+    background: var(--bg); color: var(--text-primary);
+    font-size: 14px; font-family: inherit; outline: none;
+    transition: border-color .15s, box-shadow .15s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(29,107,62,.1);
+  }
+  .field textarea { resize: vertical; min-height: 80px; }
+  .field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%239C9A95' stroke-width='2' d='M2 4l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
+
+  .form-note { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+  .btn-submit {
+    background: var(--accent); color: #fff;
+    border: none; border-radius: var(--radius);
+    padding: 11px 20px; font-size: 14px; font-weight: 500;
+    font-family: inherit; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 7px;
+    transition: background .15s; width: fit-content;
+  }
+  .btn-submit:hover { background: #175c35; }
+  .btn-submit svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; }
+
+  .form-success {
+    display: none; padding: 1.5rem; text-align: center; color: var(--accent-text);
+  }
+  .form-success.visible { display: block; }
+  .form-success svg { width: 36px; height: 36px; stroke: var(--accent); fill: none; stroke-width: 2; margin-bottom: .5rem; }
+  .form-success h3 { font-size: 16px; font-weight: 600; margin-bottom: .25rem; }
+  .form-success p { font-size: 13px; opacity: .8; }
+
+  /* ── FOOTER ── */
+  footer {
+    margin-top: 3rem; border-top: 1px solid var(--border);
+    padding: 1.5rem 1.25rem; text-align: center;
+    font-size: 12px; color: var(--text-muted);
+  }
+  footer a { color: var(--text-muted); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 1.5rem; }
+    .hero-stats { gap: 1.5rem; }
+    .header-inner { gap: .75rem; }
+    .logo-text { display: none; }
+    .btn-indicar span { display: none; }
+    .btn-indicar { padding: 9px 12px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      </div>
+      <span class="logo-text">Pessoas <span>Indicam</span> Pessoas</span>
+    </a>
+
+    <div class="header-search">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="search" placeholder="Buscar profissional ou serviço…" oninput="filterAll()" aria-label="Buscar profissional">
+    </div>
+
+    <a href="#indicar" class="btn-indicar">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      <span>Indicar profissional</span>
+    </a>
+  </div>
+</header>
+
+<!-- ── HERO ── -->
+<section class="hero" aria-label="Sobre o site">
+  <h1>Profissionais indicados<br>por quem já contratou</h1>
+  <p>Encontre prestadores de serviço de confiança, recomendados pela nossa comunidade desde 2023.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-num" id="stat-total">0</div>
+      <div class="hero-stat-label">profissionais</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num" id="stat-cats">0</div>
+      <div class="hero-stat-label">categorias</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">2023</div>
+      <div class="hero-stat-label">desde julho</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CATEGORIES ── -->
+<nav class="cats-bar" aria-label="Filtrar por categoria">
+  <div class="cats-inner" id="cats"></div>
+</nav>
+
+<!-- ── MAIN ── -->
+<main class="main">
+  <p class="results-info" id="results-info" aria-live="polite"></p>
+  <div class="grid" id="grid" role="list"></div>
+
+  <!-- ── FORMULÁRIO DE INDICAÇÃO ── -->
+  <section class="indicar-section" id="indicar" aria-label="Formulário de indicação">
+    <div class="indicar-header">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      <div>
+        <h2>Indique um profissional</h2>
+        <p>Sua indicação ajuda toda a comunidade a encontrar bons prestadores.</p>
+      </div>
+    </div>
+
+    <form class="indicar-form" id="indicar-form" onsubmit="submitForm(event)" novalidate>
+      <div class="form-row">
+        <div class="field">
+          <label for="f-nome">Nome do profissional *</label>
+          <input type="text" id="f-nome" placeholder="Ex: João Silva" required>
+        </div>
+        <div class="field">
+          <label for="f-celular">Celular / contato *</label>
+          <input type="tel" id="f-celular" placeholder="(11) 99999-9999" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="f-servico">Serviço oferecido *</label>
+          <input type="text" id="f-servico" placeholder="Ex: Eletricista, Pintor…" required>
+        </div>
+        <div class="field">
+          <label for="f-cat">Categoria *</label>
+          <select id="f-cat" required>
+            <option value="">Selecione…</option>
+            <option>Ar condicionado</option>
+            <option>Automotivo</option>
+            <option>Beleza</option>
+            <option>Construção</option>
+            <option>Costura</option>
+            <option>Decoração</option>
+            <option>Eletrodomésticos</option>
+            <option>Elétrica</option>
+            <option>Eventos</option>
+            <option>Informática</option>
+            <option>Limpeza</option>
+            <option>Manutenção geral</option>
+            <option>Marcenaria</option>
+            <option>Pintura</option>
+            <option>Saúde &amp; fitness</option>
+            <option>Tapeçaria</option>
+            <option>Transporte</option>
+            <option>Vidraçaria</option>
+            <option>Outro</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="f-obs">Observações (opcional)</label>
+        <textarea id="f-obs" placeholder="Conte por que você indica esse profissional, endereço, redes sociais…"></textarea>
+      </div>
+
+      <p class="form-note">
+        * Campos obrigatórios. As indicações enviadas aqui são revisadas antes de serem publicadas.
+        Este site não valida as informações dos profissionais — use seu próprio critério ao contratar.
+      </p>
+
+      <button type="submit" class="btn-submit">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        Enviar indicação
+      </button>
+    </form>
+
+    <div class="form-success" id="form-success" role="alert">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+      <h3>Indicação recebida!</h3>
+      <p>Obrigado por contribuir com a comunidade. Revisaremos e publicaremos em breve.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Pessoas Indicam Pessoas · Desde julho de 2023 · São Paulo, SP</p>
+  <p style="margin-top:.25rem">As indicações são enviadas pela comunidade. O responsável pelo site não valida as informações.</p>
+</footer>
+
+<script>
+const PROFESSIONALS = [
+  { name:"Sr. José", service:"Manutenção geral – pintura, encanamento e outros serviços", phone:"(11) 97075-5014", cat:"Manutenção geral" },
+  { name:"Sandro", service:"Instalação e manutenção de ar condicionado", phone:"(11) 98208-5887", cat:"Ar condicionado" },
+  { name:"Pereira", service:"Manutenção geral – pintura, encanamento e outros serviços", phone:"(11) 99683-5991", cat:"Manutenção geral" },
+  { name:"Costureira Dona Francisca", service:"Troca de zíper, ajustes em geral, barras sob medida. Roupas masculinas, femininas e infantis.", phone:"(11) 98538-5881", cat:"Costura" },
+  { name:"Tapeçaria Art Point", service:"Tapeçaria em geral — Contato: Erick", phone:"(11) 97603-7284", cat:"Tapeçaria" },
+  { name:"Lindomar", service:"Pedreiro", phone:"(11) 93929-6197", cat:"Construção" },
+  { name:"Damião Sena", service:"Vidros e Box", phone:"(11) 96101-5205", cat:"Vidraçaria" },
+  { name:"Alexandre", service:"Cortinas", phone:"(11) 99449-8804", cat:"Decoração" },
+  { name:"Geroncio", service:"Toldos e coberturas", phone:"(11) 96441-3180", cat:"Construção" },
+  { name:"Dona Terezinha", service:"Diarista", phone:"(11) 97115-1516", cat:"Limpeza" },
+  { name:"Fabio Luis", service:"Tapeceiro", phone:"(11) 99729-6486", cat:"Tapeçaria" },
+  { name:"Carlos Pintor", service:"Pinturas em geral", phone:"(11) 98331-1167", cat:"Pintura" },
+  { name:"Gesse", service:"Montador de móveis", phone:"(11) 99782-8864", cat:"Manutenção geral" },
+  { name:"Toninho Pintor", service:"Pinturas em geral", phone:"(11) 97170-6073", cat:"Pintura" },
+  { name:"Carlos", service:"Personal trainer", phone:"(11) 97249-5074", cat:"Saúde & fitness" },
+  { name:"Eli", service:"Eletricista", phone:"(11) 97449-3885", cat:"Elétrica" },
+  { name:"Anderson", service:"Eletricista", phone:"(11) 96214-5986", cat:"Elétrica" },
+  { name:"Clayton", service:"Eletricista", phone:"(11) 97040-5890", cat:"Elétrica" },
+  { name:"LZ Eletricista (Luiz)", service:"Eletricista", phone:"(11) 95308-3973", cat:"Elétrica" },
+  { name:"Ronaldo", service:"Eletricista e instalação de câmeras", phone:"(11) 96404-2575", cat:"Elétrica" },
+  { name:"Nilson", service:"Eletricista", phone:"(11) 98485-5191", cat:"Elétrica" },
+  { name:"Lucas", service:"Tapeceiro", phone:"(11) 94741-9600", cat:"Tapeçaria" },
+  { name:"Talita", service:"Tapeceiro", phone:"(11) 97305-7529", cat:"Tapeçaria" },
+  { name:"Mineiro Churrasco", service:"Churrasco completo para seu evento", phone:"(11) 96264-7773", cat:"Eventos" },
+  { name:"Sergio – Arte e Vida Tapeçaria", service:"Tapeceiro", phone:"(11) 98525-1968", cat:"Tapeçaria" },
+  { name:"Wanderlei – Reforma Sofá", service:"Tapeçaria e reforma de sofás", phone:"(11) 98989-0692", cat:"Tapeçaria" },
+  { name:"Rogério", service:"Vidraçaria", phone:"(11) 98303-1657", cat:"Vidraçaria" },
+  { name:"Everaldo", service:"Vidraçaria", phone:"(11) 99784-7814", cat:"Vidraçaria" },
+  { name:"Arruda Fernanda Tapeçaria", service:"Tapeceiro", phone:"(11) 94798-3381", cat:"Tapeçaria" },
+  { name:"Lucas Vidraçaria", service:"Vidraçaria", phone:"(11) 94301-0685", cat:"Vidraçaria" },
+  { name:"Elisabete", service:"Diarista", phone:"(11) 98514-8887", cat:"Limpeza" },
+  { name:"Cristiano", service:"Marceneiro e montagem de móveis", phone:"(11) 99631-1154", cat:"Marcenaria" },
+  { name:"Dona Beta", service:"Diarista", phone:"(11) 95083-6066", cat:"Limpeza" },
+  { name:"Toninho Pedreiro", service:"Pedreiro", phone:"(11) 99984-7379", cat:"Construção" },
+  { name:"José Domingos", service:"Pedreiro", phone:"(11) 97708-1742", cat:"Construção" },
+  { name:"Kingflair Bartenders (Ricardo)", service:"Bar e drinks para festas e eventos", phone:"(11) 97253-7672", cat:"Eventos" },
+  { name:"Cal – Assistência Técnica", service:"Máquina de lavar", phone:"(11) 99777-4673", cat:"Eletrodomésticos" },
+  { name:"Paulo – Assistência Técnica", service:"Máquina de lavar e micro-ondas", phone:"(11) 99506-2254", cat:"Eletrodomésticos" },
+  { name:"MB – Assistência Técnica", service:"Máquina de lavar", phone:"(11) 97800-0919", cat:"Eletrodomésticos" },
+  { name:"Costureira – Detalhe da Costura", service:"Costura em geral", phone:"(11) 3496-5161", cat:"Costura" },
+  { name:"Daniel Moura – Assistência Técnica", service:"Máquina de lavar – Brastemp, Electrolux, Bosch e Consul", phone:"(11) 96205-9205", cat:"Eletrodomésticos" },
+  { name:"Edesio – Assistência Técnica", service:"Máquina de lavar", phone:"(11) 97169-2138", cat:"Eletrodomésticos" },
+  { name:"Stefano – Informática", service:"Configuração de redes, wifi, computadores e celulares", phone:"(11) 99170-3359", cat:"Informática" },
+  { name:"Marcos Brandao – Impressão Digital", service:"Gráfica rápida e comunicação visual", phone:"(11) 99643-7474", cat:"Manutenção geral" },
+  { name:"Blatt Fraldas (Susie)", service:"Tapetes higiênicos para pets", phone:"(11) 93296-7481", cat:"Manutenção geral" },
+  { name:"DJ Leandro Naumes", service:"DJ, som e iluminação para eventos", phone:"(11) 99559-0336", cat:"Eventos" },
+  { name:"Alessandra – Cabelereira", service:"Cortes de senhores e senhoras a domicílio", phone:"(11) 94521-1064", cat:"Beleza" },
+  { name:"Luci Sales – Manicure", service:"Manicure e pedicure a domicílio", phone:"(11) 94901-5236", cat:"Beleza" },
+  { name:"Laura – Uber", service:"Serviço de Uber", phone:"(11) 97164-5930", cat:"Transporte" },
+  { name:"Janaina Souza – Motorista", service:"Agendamento escolar, aeroporto, empresas e viagens. Aceita pets.", phone:"(11) 98903-5031", cat:"Transporte" },
+  { name:"CWD Informática", service:"Manutenção de notebooks, computadores e impressoras", phone:"", cat:"Informática" },
+  { name:"Bivic Informática", service:"Manutenção de impressoras, recarga de toners e cartuchos", phone:"(11) 97444-9346", cat:"Informática" },
+  { name:"Sidinei Impressoras", service:"Manutenção em impressoras", phone:"(11) 98201-6159", cat:"Informática" },
+  { name:"Edgard Peninha", service:"Manutenção geral e dedetização – baratas, formigas, traças e outros", phone:"(11) 98433-8113", cat:"Manutenção geral" },
+  { name:"Paulo e Claudia – Churrasqueiro", service:"Churrasqueiro, copeira e garçonete (mão de obra)", phone:"(11) 98086-4819", cat:"Eventos" },
+  { name:"Hélio Vasconcelos", service:"Ar condicionado", phone:"(11) 94794-4678", cat:"Ar condicionado" },
+  { name:"Marquinhos Orelha – Van", service:"Serviço de van e transporte", phone:"(11) 94072-4213", cat:"Transporte" },
+  { name:"Mario Ratti", service:"Ar condicionado", phone:"(11) 94716-8113", cat:"Ar condicionado" },
+  { name:"Sapateiro Thiago", service:"Sapataria – Av. Gen. Ataliba Leonel, 3659 – Tucuruvi", phone:"(11) 98621-4876", cat:"Manutenção geral" },
+  { name:"Sapateiro Moacir", service:"Sapataria – R. Chico Pontes, 65 – Vila Guilherme", phone:"(11) 96315-8035", cat:"Manutenção geral" },
+  { name:"Sapataria Real", service:"Sapataria – R. Amaral Gama, 383 – Santana", phone:"(11) 94613-1559", cat:"Manutenção geral" },
+  { name:"Jésus Bike – Bicicletaria", service:"Bicicletaria – R. Cap. Siqueira Barbosa, 123 – Parada Inglesa", phone:"(11) 2959-9053", cat:"Manutenção geral" },
+  { name:"Bontempi Bikes", service:"Bicicletaria – Av. Júlio Buono, 1004 – Vila Gustavo", phone:"(11) 96898-1412", cat:"Manutenção geral" },
+  { name:"Crepe Silvio", service:"Crespes a domicílio para festas e eventos", phone:"(11) 99971-9139", cat:"Eventos" },
+  { name:"Buffet Ouro Crepe", service:"Qualidade e bom gosto para seu evento", phone:"(11) 98165-3834", cat:"Eventos" },
+  { name:"Crepes Delice", service:"Crepes para eventos e festas", phone:"(11) 97300-1577", cat:"Eventos" },
+  { name:"Moreira Tapeceiro", service:"Tapeçaria", phone:"(11) 98217-1367", cat:"Tapeçaria" },
+  { name:"Só Sofá", service:"Tapeçaria e reforma de sofás", phone:"(11) 95702-5955", cat:"Tapeçaria" },
+  { name:"João Tapeceiro", service:"Tapeçaria", phone:"(11) 98501-1156", cat:"Tapeçaria" },
+  { name:"Tapeçaria Sr. João", service:"Tapeçaria", phone:"(11) 97529-3146", cat:"Tapeçaria" },
+  { name:"Babuum Buffet Infantil", service:"Festas infantis com mais de 15 atrações – Zona Norte SP", phone:"(11) 91483-1886", cat:"Eventos" },
+  { name:"Autotec Oficina Mecânica", service:"Mecânica completa e auto elétrico – 58 anos de tradição na Zona Norte", phone:"(11) 99569-9842", cat:"Automotivo" },
+  { name:"Tapeçaria Rosana Bezerra", service:"Cabeceiras e tapeçaria", phone:"(11) 98759-2990", cat:"Tapeçaria" },
+  { name:"Leonardo Laranjeiro – Personal", service:"Treinos específicos e personalizados", phone:"(11) 99415-2628", cat:"Saúde & fitness" },
+  { name:"Divertio Lazer e Recreação", service:"Animação para festas particulares e eventos", phone:"(11) 99415-2628", cat:"Eventos" },
+  { name:"Memórias em DVD", service:"Digitalização de fitas, K7s, vinil, slides e negativos", phone:"(11) 99559-0336", cat:"Manutenção geral" },
+  { name:"Alberto – Sacadas", service:"Manutenção em sacadas", phone:"(11) 97369-2835", cat:"Construção" },
+  { name:"SulFrio Ar condicionado", service:"Instalação e manutenção em ar condicionado", phone:"(11) 94020-6949", cat:"Ar condicionado" },
+  { name:"Gesseiro Madruga", service:"Serviços com gesso em geral", phone:"(11) 97422-4509", cat:"Construção" },
+  { name:"Gesseiro Paulo", service:"Serviços com gesso em geral", phone:"(11) 99617-7630", cat:"Construção" },
+  { name:"Gesseiro Marcio", service:"Serviços com gesso em geral", phone:"(11) 97207-7377", cat:"Construção" },
+  { name:"Gesseiro Toninho", service:"Serviços com gesso em geral", phone:"(11) 97786-3314", cat:"Construção" },
+  { name:"Marceneiro Mauricio", service:"Marcenaria e montagem de móveis", phone:"(11) 97095-1854", cat:"Marcenaria" },
+  { name:"Marcelo Ar Condicionado", service:"Instalação e manutenção em ar condicionado", phone:"(11) 94448-7697", cat:"Ar condicionado" },
+  { name:"Karine Personal", service:"Personal trainer para qualquer idade", phone:"(11) 99701-2181", cat:"Saúde & fitness" },
+  { name:"Fernando Fabi Ar condicionado", service:"Instalação e manutenção em ar condicionado", phone:"(11) 97454-9906", cat:"Ar condicionado" },
+  { name:"RMH Ar Condicionado", service:"Instalação e manutenção em ar condicionado", phone:"(11) 97560-0737", cat:"Ar condicionado" },
+  { name:"Andre Ar Condicionado", service:"Instalação e manutenção em ar condicionado", phone:"(11) 94744-5449", cat:"Ar condicionado" },
+  { name:"Neto Churrasqueiro", service:"Churrasqueiro para eventos", phone:"(11) 96206-7013", cat:"Eventos" },
+  { name:"Jefferson Churrasqueiro", service:"Churrasqueiro para eventos", phone:"(11) 95307-2890", cat:"Eventos" },
+  { name:"Celso – Assistência Técnica", service:"Máquina de lavar e geladeira – Brastemp, Electrolux, Bosch e Consul", phone:"(11) 98105-3077", cat:"Eletrodomésticos" },
+  { name:"Mariano – FTT Artes Marciais", service:"Muay Thai, Kickboxing, Boxe, Defesa Pessoal — aulas individuais ou em grupo", phone:"(11) 91049-5923", cat:"Saúde & fitness" },
+  { name:"Sr. Marcos – Sacadas", service:"Envidraçamento de sacadas, coberturas, gardens e persianas", phone:"(11) 97047-0568", cat:"Construção" },
+  { name:"Marcelo Fix Ar Condicionado", service:"Instalação e manutenção em ar condicionado", phone:"(11) 98447-7545", cat:"Ar condicionado" },
+  { name:"Sr. Sergio – Taxi Top", service:"Transfer executivo, agendamentos e viagens. Não cobra hora parada.", phone:"(11) 94737-4700", cat:"Transporte" },
+  { name:"Sr. Marcos – Uber Agendado", service:"Uber com agendamentos para corridas e viagens", phone:"(11) 97047-0568", cat:"Transporte" },
+  { name:"Gabriel Motoboy", service:"Entregas de mercadorias e documentos em São Paulo", phone:"(11) 98721-8130", cat:"Transporte" },
+  { name:"Eduardo – Câmeras CFTV", service:"Instalação de câmeras de segurança residenciais e empresas", phone:"(11) 96071-4492", cat:"Elétrica" },
+];
+
+const CAT_COLORS = {
+  "Ar condicionado":  { bg:"#E6F1FB", text:"#185FA5" },
+  "Automotivo":       { bg:"#FCEBEB", text:"#A32D2D" },
+  "Beleza":           { bg:"#FBEAF0", text:"#883050" },
+  "Construção":       { bg:"#FAEEDA", text:"#854F0B" },
+  "Costura":          { bg:"#FBEAF0", text:"#883050" },
+  "Decoração":        { bg:"#EEEDFE", text:"#534AB7" },
+  "Eletrodomésticos": { bg:"#E6F1FB", text:"#185FA5" },
+  "Elétrica":         { bg:"#FAEEDA", text:"#854F0B" },
+  "Eventos":          { bg:"#EEEDFE", text:"#534AB7" },
+  "Informática":      { bg:"#E6F1FB", text:"#185FA5" },
+  "Limpeza":          { bg:"#EAF3DE", text:"#3B6D11" },
+  "Manutenção geral": { bg:"#F1EFE8", text:"#5F5E5A" },
+  "Marcenaria":       { bg:"#FAEEDA", text:"#854F0B" },
+  "Pintura":          { bg:"#E1F5EE", text:"#0F6E56" },
+  "Saúde & fitness":  { bg:"#EAF3DE", text:"#3B6D11" },
+  "Tapeçaria":        { bg:"#EEEDFE", text:"#534AB7" },
+  "Transporte":       { bg:"#E6F1FB", text:"#185FA5" },
+  "Vidraçaria":       { bg:"#E1F5EE", text:"#0F6E56" },
+};
+
+const AVATAR_PALETTE = [
+  { bg:"#EAF4EE", text:"#145530" },
+  { bg:"#E6F1FB", text:"#185FA5" },
+  { bg:"#EEEDFE", text:"#534AB7" },
+  { bg:"#FBEAF0", text:"#883050" },
+  { bg:"#FAEEDA", text:"#854F0B" },
+  { bg:"#E1F5EE", text:"#0F6E56" },
+];
+
+let activeCategory = "Todos";
+
+function initials(name) {
+  const parts = name.replace(/[^a-zA-ZÀ-ÿ\s]/g, '').trim().split(/\s+/);
+  return parts.slice(0, 2).map(w => w[0] || '').join('').toUpperCase() || '?';
+}
+
+function fmtPhone(raw) {
+  return raw.replace(/\D/g, '');
+}
+
+function getCategories() {
+  const cats = [...new Set(PROFESSIONALS.map(p => p.cat))].sort();
+  return ["Todos", ...cats];
+}
+
+function renderCats() {
+  const cats = getCategories();
+  const counts = {};
+  PROFESSIONALS.forEach(p => { counts[p.cat] = (counts[p.cat] || 0) + 1; });
+  const totalAll = PROFESSIONALS.length;
+
+  document.getElementById('cats').innerHTML = cats.map(c => {
+    const count = c === "Todos" ? totalAll : (counts[c] || 0);
+    const active = c === activeCategory ? ' active' : '';
+    return `<button class="cat-btn${active}" onclick="setCategory('${c.replace(/'/g,"\\'")}')">
+      ${c} <span class="count">${count}</span>
+    </button>`;
+  }).join('');
+}
+
+function setCategory(cat) {
+  activeCategory = cat;
+  renderCats();
+  filterAll();
+}
+
+function filterAll() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const filtered = PROFESSIONALS.filter(p => {
+    const matchCat = activeCategory === "Todos" || p.cat === activeCategory;
+    const matchQ = !q || p.name.toLowerCase().includes(q) || p.service.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+
+  const info = document.getElementById('results-info');
+  if (q || activeCategory !== "Todos") {
+    info.innerHTML = `<strong>${filtered.length}</strong> profissional${filtered.length !== 1 ? 'is' : ''} encontrado${filtered.length !== 1 ? 's' : ''}`;
+  } else {
+    info.innerHTML = '';
+  }
+
+  const grid = document.getElementById('grid');
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="empty">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <p>Nenhum profissional encontrado. Tente outro termo ou categoria.</p>
+    </div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map((p, i) => {
+    const av = AVATAR_PALETTE[i % AVATAR_PALETTE.length];
+    const cc = CAT_COLORS[p.cat] || { bg:"#F1EFE8", text:"#5F5E5A" };
+    const phoneDigits = fmtPhone(p.phone);
+    const hasPhone = phoneDigits.length >= 8;
+
+    return `<article class="card" role="listitem">
+      <div class="card-top">
+        <div class="avatar" style="background:${av.bg};color:${av.text}" aria-hidden="true">${initials(p.name)}</div>
+        <div class="card-meta">
+          <div class="card-name">${p.name}</div>
+          <div class="card-service">${p.service}</div>
+        </div>
+        <span class="cat-tag" style="background:${cc.bg};color:${cc.text}">${p.cat}</span>
+      </div>
+      <div class="card-footer">
+        <div class="card-phone">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          ${p.phone || 'Sem telefone cadastrado'}
+        </div>
+        ${hasPhone ? `<a class="wpp-link" href="https://wa.me/55${phoneDigits}" target="_blank" rel="noopener" aria-label="Contatar ${p.name} via WhatsApp">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          WhatsApp
+        </a>` : ''}
+      </div>
+    </article>`;
+  }).join('');
+}
+
+function submitForm(e) {
+  e.preventDefault();
+  const nome = document.getElementById('f-nome').value.trim();
+  const celular = document.getElementById('f-celular').value.trim();
+  const servico = document.getElementById('f-servico').value.trim();
+  const cat = document.getElementById('f-cat').value;
+
+  if (!nome || !celular || !servico || !cat) {
+    alert('Por favor, preencha todos os campos obrigatórios.');
+    return;
+  }
+
+  // In a real deployment, send this to a backend or email service
+  // For now, we just show the success message
+  document.getElementById('indicar-form').style.display = 'none';
+  document.getElementById('form-success').classList.add('visible');
+
+  // Scroll to success message
+  document.getElementById('form-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// ── INIT ──
+(function init() {
+  const uniqueCats = [...new Set(PROFESSIONALS.map(p => p.cat))];
+  document.getElementById('stat-total').textContent = PROFESSIONALS.length;
+  document.getElementById('stat-cats').textContent = uniqueCats.length;
+  renderCats();
+  filterAll();
+})();
+</script>
+</body>
+</html>
