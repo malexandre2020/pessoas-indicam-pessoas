@@ -939,7 +939,7 @@ function filterEmp() {
         <span class="cat-tag" style="background:${cc.bg};color:${cc.text}">${e.cat}</span>
       </div>
       <div class="stars-row">
-        <span class="stars" onclick="openModal('${rid.replace(/'/g,"\'")}','${e.name.replace(/'/g,"\'")}','emp')" title="Clique para avaliar">${starsHtml(rv.avg)}</span>
+        <span class="stars" data-rid="${rid}" data-name="${e.name.replace(/"/g,'&quot;')}" data-type="emp" onclick="openModal(this.dataset.rid,this.dataset.name,this.dataset.type)" title="Clique para avaliar">${starsHtml(rv.avg)}</span>
         ${rv.count>0?`<span class="rating-avg">${rv.avg.toFixed(1)}</span><span class="rating-info">(${rv.count} avaliação${rv.count>1?"ões":""})</span>`:`<span class="rating-info">Seja o primeiro a avaliar</span>`}
       </div>
       <div class="card-footer">
