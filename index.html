@@ -709,7 +709,7 @@ async function loadRatings(){
   if(ratingsCache) return ratingsCache;
   try {
     const r = await fetch(`${JSONBIN_URL}/latest`, {
-      headers: { "X-Master-Key": JSONBIN_KEY }
+      headers: { "X-Access-Key": JSONBIN_KEY }
     });
     const json = await r.json();
     ratingsCache = json.record?.ratings || {};
@@ -731,7 +731,7 @@ async function saveRatingRemote(id, value){
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "X-Master-Key": JSONBIN_KEY
+        "X-Access-Key": JSONBIN_KEY
       },
       body: JSON.stringify({ ratings: data })
     });
