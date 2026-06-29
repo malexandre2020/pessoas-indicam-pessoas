@@ -709,26 +709,53 @@ function submitForm(e, type) {
   renderMedCats();
 })();
 
-/* ── RATINGS (localStorage) ── */
+/* ── RATINGS (JSONBin.io — compartilhado entre todos os visitantes) ── */
+const JSONBIN_ID  = "6a41cf8eda38895dfe0daa17";
+const JSONBIN_KEY = "$2a$10$0iEsZmH.rUreUjYTogdHE.d506NJSqtk6jGhkm5aPO4JHuTCuIQdm";
+const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_ID}`;
+
+let ratingsCache = null;   // cache local para não bater na API a cada render
+let ratingsDirty = false;  // indica se há mudança pendente para salvar
+
+async function loadRatings(){
+  if(ratingsCache) return ratingsCache;
+  try {
+    const r = await fetch(`${JSONBIN_URL}/latest`, {
+      headers: { "X-Master-Key": JSONBIN_KEY }
+    });
+    const json = await r.json();
+    ratingsCache = json.record?.ratings || {};
+  } catch(e){
+    ratingsCache = {};
+  }
+  return ratingsCache;
+}
+
+async function saveRatingRemote(id, value){
+  const data = await loadRatings();
+  const cur  = data[id] || {avg:0, count:0};
+  const newCount = cur.count + 1;
+  const newAvg   = (cur.avg * cur.count + value) / newCount;
+  data[id] = {avg: newAvg, count: newCount};
+  ratingsCache = data;
+  try {
+    await fetch(JSONBIN_URL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Master-Key": JSONBIN_KEY
+      },
+      body: JSON.stringify({ ratings: data })
+    });
+  } catch(e){ console.warn("Erro ao salvar avaliação:", e); }
+  return data[id];
+}
+
 function slugify(s){ return s.toLowerCase().replace(/[^a-z0-9]/g,"-").replace(/-+/g,"-"); }
 
 function getRating(id){
-  try {
-    const data = JSON.parse(localStorage.getItem("pip_ratings")||"{}");
-    return data[id] || {avg:0, count:0};
-  } catch(e){ return {avg:0,count:0}; }
-}
-
-function saveRating(id, value){
-  try {
-    const data = JSON.parse(localStorage.getItem("pip_ratings")||"{}");
-    const cur = data[id] || {avg:0, count:0};
-    const newCount = cur.count + 1;
-    const newAvg   = (cur.avg * cur.count + value) / newCount;
-    data[id] = {avg: newAvg, count: newCount};
-    localStorage.setItem("pip_ratings", JSON.stringify(data));
-    return data[id];
-  } catch(e){ return {avg:value, count:1}; }
+  if(!ratingsCache) return {avg:0, count:0};
+  return ratingsCache[id] || {avg:0, count:0};
 }
 
 function starsHtml(avg){
@@ -762,6 +789,11 @@ function updateModalStars(v){
 }
 
 document.addEventListener("DOMContentLoaded", function(){
+  // Carrega avaliações assim que a página abre e re-renderiza os cards
+  loadRatings().then(() => {
+    if(currentSection==="serv") filterServ(); else filterMed();
+  });
+
   document.getElementById("rating-modal").addEventListener("click", function(e){
     if(e.target === this) closeModal();
   });
@@ -776,10 +808,14 @@ document.addEventListener("DOMContentLoaded", function(){
   });
 });
 
-function confirmRating(){
+async function confirmRating(){
   if(!modalId || !modalValue) return;
-  saveRating(modalId, modalValue);
+  const btn = document.getElementById("modal-confirm");
+  btn.disabled = true;
+  btn.textContent = "Salvando…";
+  await saveRatingRemote(modalId, modalValue);
   closeModal();
+  btn.textContent = "Confirmar";
   if(modalType==="serv") filterServ(); else filterMed();
 }
 
