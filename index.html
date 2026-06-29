@@ -71,16 +71,16 @@
   .hero-stat-label { font-size: 11px; opacity: .7; margin-top: 2px; }
 
   /* CATEGORIES BAR */
-  .cats-bar { background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
-  .cats-bar::-webkit-scrollbar { display: none; }
-  .cats-inner { max-width: 1100px; margin: 0 auto; padding: .6rem 1.25rem; display: flex; gap: 6px; }
-  .cat-btn { flex-shrink: 0; border: 1px solid var(--border); background: transparent; border-radius: 20px; padding: 5px 14px; font-size: 13px; font-weight: 500; cursor: pointer; color: var(--text-secondary); display: flex; align-items: center; gap: 5px; transition: all .15s; font-family: inherit; }
-  .cat-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .cat-btn.active { background: var(--accent-bg); border-color: var(--accent-border); color: var(--accent-text); }
-  .cat-btn.active.med { background: var(--accent-med-bg); border-color: var(--accent-med-border); color: var(--accent-med-text); }
-  .cat-btn .count { background: var(--border); color: var(--text-muted); border-radius: 20px; padding: 0 6px; font-size: 11px; }
-  .cat-btn.active .count { background: var(--accent-border); color: var(--accent-text); }
-  .cat-btn.active.med .count { background: var(--accent-med-border); color: var(--accent-med-text); }
+  .filter-bar { background: var(--surface); border-bottom: 1px solid var(--border); }
+  .filter-inner { max-width: 1100px; margin: 0 auto; padding: .6rem 1.25rem; display: flex; align-items: center; gap: 10px; }
+  .filter-label { font-size: 13px; color: var(--text-muted); white-space: nowrap; }
+  .filter-select-wrap { position: relative; }
+  .filter-select-wrap svg { position: absolute; right: 10px; top: 50%; transform: translateY(-50%); width: 14px; height: 14px; stroke: var(--text-muted); fill: none; stroke-width: 2; pointer-events: none; }
+  .filter-select { appearance: none; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); color: var(--text-primary); font-size: 14px; font-weight: 500; font-family: inherit; padding: 7px 32px 7px 12px; cursor: pointer; outline: none; min-width: 220px; transition: border-color .15s, box-shadow .15s; }
+  .filter-select:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(29,107,62,.1); }
+  .filter-select.med:focus { border-color: var(--accent-med); box-shadow: 0 0 0 3px rgba(24,95,165,.1); }
+  .filter-badge { font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--accent-bg); color: var(--accent-text); border: 1px solid var(--accent-border); white-space: nowrap; }
+  .filter-badge.med { background: var(--accent-med-bg); color: var(--accent-med-text); border-color: var(--accent-med-border); }
 
   /* MAIN */
   .main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; }
@@ -226,7 +226,7 @@
       <div class="hero-stat"><div class="hero-stat-num">2023</div><div class="hero-stat-label">desde julho</div></div>
     </div>
   </section>
-  <nav class="cats-bar" aria-label="Filtrar serviços por categoria"><div class="cats-inner" id="cats-serv"></div></nav>
+  <div class="filter-bar"><div class="filter-inner"><span class="filter-label">Filtrar por categoria</span><div class="filter-select-wrap"><select class="filter-select" id="cats-serv" onchange="setServCat(this.value)" aria-label="Categoria"><option value="Todos">Todos</option></select><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></div><span class="filter-badge" id="badge-serv"></span></div></div>
   <main class="main">
     <p class="results-info" id="results-serv" aria-live="polite"></p>
     <div class="grid" id="grid-serv" role="list"></div>
@@ -280,7 +280,7 @@
       <div class="hero-stat"><div class="hero-stat-num" id="stat-med-cats">0</div><div class="hero-stat-label">especialidades</div></div>
     </div>
   </section>
-  <nav class="cats-bar" aria-label="Filtrar por especialidade"><div class="cats-inner" id="cats-med"></div></nav>
+  <div class="filter-bar"><div class="filter-inner"><span class="filter-label">Filtrar por especialidade</span><div class="filter-select-wrap"><select class="filter-select med" id="cats-med" onchange="setMedCat(this.value)" aria-label="Especialidade"><option value="Todos">Todas as especialidades</option></select><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></div><span class="filter-badge med" id="badge-med"></span></div></div>
   <main class="main">
     <p class="results-info" id="results-med" aria-live="polite"></p>
     <div class="grid" id="grid-med" role="list"></div>
@@ -535,11 +535,14 @@ function renderServCats() {
   const counts = {};
   PROFESSIONALS.forEach(p => { counts[p.cat] = (counts[p.cat]||0)+1; });
   const cats = ["Todos", ...[...new Set(PROFESSIONALS.map(p=>p.cat))].sort()];
-  document.getElementById("cats-serv").innerHTML = cats.map(c => {
+  const sel = document.getElementById("cats-serv");
+  const cur = sel.value || activeServCat;
+  sel.innerHTML = cats.map(c => {
     const count = c==="Todos" ? PROFESSIONALS.length : (counts[c]||0);
-    return `<button class="cat-btn${c===activeServCat?" active":""}" onclick="setServCat('${c.replace(/'/g,"\\'")}')">
-      ${c} <span class="count">${count}</span></button>`;
+    return `<option value="${c}"${c===cur?" selected":""}>${c} (${count})</option>`;
   }).join("");
+  const badge = document.getElementById("badge-serv");
+  badge.textContent = activeServCat==="Todos" ? PROFESSIONALS.length+" profissionais" : counts[activeServCat]+" encontrados";
 }
 
 function setServCat(cat) { activeServCat=cat; renderServCats(); filterServ(); }
@@ -578,11 +581,15 @@ function renderMedCats() {
   const counts = {};
   DOCTORS.forEach(d => { counts[d.spec]=(counts[d.spec]||0)+1; });
   const cats = ["Todos",...[...new Set(DOCTORS.map(d=>d.spec))].sort()];
-  document.getElementById("cats-med").innerHTML = cats.map(c => {
+  const sel = document.getElementById("cats-med");
+  const cur = sel.value || activeMedCat;
+  sel.innerHTML = cats.map(c => {
     const count = c==="Todos" ? DOCTORS.length : (counts[c]||0);
-    return `<button class="cat-btn${c===activeMedCat?" active med":""}" onclick="setMedCat('${c.replace(/'/g,"\\'")}')">
-      ${c} <span class="count">${count}</span></button>`;
+    const label = c==="Todos" ? "Todas as especialidades" : c;
+    return `<option value="${c}"${c===cur?" selected":""}>${label} (${count})</option>`;
   }).join("");
+  const badge = document.getElementById("badge-med");
+  badge.textContent = activeMedCat==="Todos" ? DOCTORS.length+" especialistas" : counts[activeMedCat]+" encontrados";
 }
 
 function setMedCat(cat) { activeMedCat=cat; renderMedCats(); filterMed(); }
