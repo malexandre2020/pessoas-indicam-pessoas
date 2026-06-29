@@ -686,6 +686,7 @@ const DOCTORS = [
 /* ═══ ENTREPRENEURS DATA ═══ */
 const ENTREPRENEURS = [
   { name:"Lastro D'Ouro", service:"Pães e Caldos Caseiros – Receitas caseiras desde 2019", phone:"(11) 97871-6452", cat:"Alimentação", address:"", instagram:"https://www.instagram.com/lastrodouro", logo:"lastro-douro.png" },
+  { name:"PizzaCine", service:"Delivery de Pizzas – Receitas especiais com clima de cinema", phone:"(11) 2979-7768", cat:"Alimentação", address:"Rua Conselheiro Saraiva, 923 – Santana – São Paulo", instagram:"https://www.instagram.com/pizzacine_oficial/", site:"https://pizzacine.com.br/", logo:"pizzacine.png" },
 ];
 
 /* ═══ COLORS ═══ */
@@ -933,7 +934,7 @@ function filterEmp() {
         <div class="card-meta">
           <div class="card-name">${e.name}</div>
           <div class="card-service">${e.service}${e.address?` · ${e.address}`:""}</div>
-          ${e.instagram?`<a href="${e.instagram}" target="_blank" rel="noopener" style="font-size:11px;color:#E1306C;margin-top:3px;display:inline-flex;align-items:center;gap:4px;text-decoration:none;font-weight:500"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#E1306C" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C" stroke="none"/></svg>Instagram</a>`:""}
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:3px">${e.instagram?`<a href="${e.instagram}" target="_blank" rel="noopener" style="font-size:11px;color:#E1306C;display:inline-flex;align-items:center;gap:4px;text-decoration:none;font-weight:500"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#E1306C" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C" stroke="none"/></svg>Instagram</a>`:""} ${e.site?`<a href="${e.site}" target="_blank" rel="noopener" style="font-size:11px;color:var(--accent);display:inline-flex;align-items:center;gap:4px;text-decoration:none;font-weight:500"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Site</a>`:""}</div>
         </div>
         <span class="cat-tag" style="background:${cc.bg};color:${cc.text}">${e.cat}</span>
       </div>
