@@ -28,6 +28,10 @@
     --accent-med-border: #B5D4F4;
     --accent-med-text: #0C447C;
     --radius: 10px;
+    --accent-emp: #7C3AED;
+    --accent-emp-bg: #F3EFFE;
+    --accent-emp-border: #C4B5FD;
+    --accent-emp-text: #5B21B6;
     --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
     --shadow-md: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
   }
@@ -59,11 +63,13 @@
   .tab-btn:hover { color: var(--text-secondary); }
   .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
   .tab-btn.active.med { color: var(--accent-med); border-bottom-color: var(--accent-med); }
+  .tab-btn.active.emp { color: #7C3AED; border-bottom-color: #7C3AED; }
 
   /* HERO */
   .hero { color: #fff; text-align: center; padding: .9rem 1.25rem; }
   .hero.serv { background: linear-gradient(135deg, #1D6B3E 0%, #145530 100%); }
   .hero.med  { background: linear-gradient(135deg, #185FA5 0%, #0C447C 100%); }
+  .hero.emp  { background: linear-gradient(135deg, #7C3AED 0%, #5B21B6 100%); }
   .hero h1 { font-size: 1.1rem; font-weight: 600; margin-bottom: .15rem; line-height: 1.3; }
   .hero p { font-size: .8rem; opacity: .85; max-width: 600px; margin: 0 auto .5rem; }
   .hero-stats { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; }
@@ -81,6 +87,8 @@
   .filter-select.med:focus { border-color: var(--accent-med); box-shadow: 0 0 0 3px rgba(24,95,165,.1); }
   .filter-badge { font-size: 12px; font-weight: 500; padding: 3px 10px; border-radius: 20px; background: var(--accent-bg); color: var(--accent-text); border: 1px solid var(--accent-border); white-space: nowrap; }
   .filter-badge.med { background: var(--accent-med-bg); color: var(--accent-med-text); border-color: var(--accent-med-border); }
+  .filter-select.emp:focus { border-color: var(--accent-emp); box-shadow: 0 0 0 3px rgba(124,58,237,.1); }
+  .filter-badge.emp { background: var(--accent-emp-bg); color: var(--accent-emp-text); border-color: var(--accent-emp-border); }
 
 
   /* STARS */
@@ -151,15 +159,19 @@
   .indicar-header { border-bottom: 1px solid var(--border); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 12px; }
   .indicar-header.serv { background: var(--accent-bg); border-bottom-color: var(--accent-border); }
   .indicar-header.med  { background: var(--accent-med-bg); border-bottom-color: var(--accent-med-border); }
+  .indicar-header.emp  { background: var(--accent-emp-bg); border-bottom-color: var(--accent-emp-border); }
   .indicar-header svg { width: 22px; height: 22px; fill: none; stroke-width: 2; flex-shrink: 0; }
   .indicar-header.serv svg { stroke: var(--accent); }
   .indicar-header.med  svg { stroke: var(--accent-med); }
+  .indicar-header.emp  svg { stroke: var(--accent-emp); }
   .indicar-header h2 { font-size: 16px; font-weight: 600; }
   .indicar-header.serv h2 { color: var(--accent-text); }
   .indicar-header.med  h2 { color: var(--accent-med-text); }
+  .indicar-header.emp  h2 { color: var(--accent-emp-text); }
   .indicar-header p { font-size: 13px; opacity: .75; }
   .indicar-header.serv p { color: var(--accent-text); }
   .indicar-header.med  p { color: var(--accent-med-text); }
+  .indicar-header.emp  p { color: var(--accent-emp-text); }
   .indicar-form { padding: 1.5rem; display: grid; gap: 12px; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
   .field { display: flex; flex-direction: column; gap: 5px; }
@@ -173,14 +185,18 @@
   .btn-submit:hover { background: #175c35; }
   .btn-submit.med { background: var(--accent-med); }
   .btn-submit.med:hover { background: #0C447C; }
+  .btn-submit.emp-btn { background: var(--accent-emp); }
+  .btn-submit.emp-btn:hover { background: #5B21B6; }
   .btn-submit svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; }
   .form-success { display: none; padding: 1.5rem; text-align: center; }
   .form-success.visible { display: block; }
   .form-success svg { width: 36px; height: 36px; fill: none; stroke-width: 2; margin: 0 auto .5rem; display: block; }
   .form-success.serv { color: var(--accent-text); }
   .form-success.med  { color: var(--accent-med-text); }
+  .form-success.emp  { color: var(--accent-emp-text); }
   .form-success.serv svg { stroke: var(--accent); }
   .form-success.med  svg { stroke: var(--accent-med); }
+  .form-success.emp  svg { stroke: var(--accent-emp); }
   .form-success h3 { font-size: 16px; font-weight: 600; margin-bottom: .25rem; }
   .form-success p { font-size: 13px; opacity: .8; }
 
@@ -233,6 +249,10 @@
     <button class="tab-btn med" id="tab-med" onclick="showSection('med')">
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
       Médicos e saúde
+    </button>
+    <button class="tab-btn emp" id="tab-emp" onclick="showSection('emp')">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Pequenos empreendedores
     </button>
   </div>
 </nav>
@@ -351,6 +371,73 @@
       </div>
     </section>
     <div class="aviso"><strong>Importante:</strong> As indicações são enviadas pela comunidade. O responsável pelo site não valida as informações dos profissionais de saúde. Sempre consulte o CRM do médico antes de agendar.</div>
+  </main>
+</div>
+
+<!-- ═══ PEQUENOS EMPREENDEDORES ═══ -->
+<div id="section-emp" style="display:none">
+  <section class="hero emp" aria-label="Sobre os pequenos empreendedores">
+    <h1>Pequenos empreendedores indicados pela comunidade</h1>
+    <p>Negócios locais e empreendedores recomendados por quem já comprou ou contratou.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num" id="stat-emp-total">0</div><div class="hero-stat-label">empreendedores</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" id="stat-emp-cats">0</div><div class="hero-stat-label">segmentos</div></div>
+    </div>
+  </section>
+  <div class="filter-bar"><div class="filter-inner"><span class="filter-label">Filtrar por segmento</span><div class="filter-select-wrap"><select class="filter-select emp" id="cats-emp" onchange="setEmpCat(this.value)" aria-label="Segmento"><option value="Todos">Todos</option></select><svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg></div><span class="filter-badge emp" id="badge-emp"></span></div></div>
+  <main class="main">
+    <p class="results-info" id="results-emp" aria-live="polite"></p>
+    <div class="grid" id="grid-emp" role="list"></div>
+    <section class="indicar-section" id="indicar-emp" aria-label="Indicar empreendedor">
+      <div class="indicar-header emp">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <div><h2>Indique um empreendedor</h2><p>Ajude negócios locais a crescer com sua indicação.</p></div>
+      </div>
+      <form class="indicar-form" id="form-emp" onsubmit="submitForm(event,'emp')" novalidate>
+        <div class="form-row">
+          <div class="field"><label for="e-nome">Nome do negócio / empreendedor *</label><input type="text" id="e-nome" placeholder="Ex: Padaria do Zé" required></div>
+          <div class="field"><label for="e-cel">Telefone / WhatsApp *</label><input type="tel" id="e-cel" placeholder="(11) 99999-9999" required></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="e-serv">Produto ou serviço *</label><input type="text" id="e-serv" placeholder="Ex: Bolos artesanais, cosméticos…" required></div>
+          <div class="field"><label for="e-cat">Segmento *</label>
+            <select id="e-cat" required>
+              <option value="">Selecione…</option>
+              <option>Alimentação</option>
+              <option>Beleza e estética</option>
+              <option>Confecção e moda</option>
+              <option>Decoração e artesanato</option>
+              <option>Educação e cursos</option>
+              <option>Informática e tecnologia</option>
+              <option>Papelaria e gráfica</option>
+              <option>Pet shop e animais</option>
+              <option>Saúde e bem-estar</option>
+              <option>Serviços gerais</option>
+              <option>Outro</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="e-end">Endereço ou bairro (opcional)</label><input type="text" id="e-end" placeholder="Ex: Vila Guilherme, SP"></div>
+          <div class="field"><label for="e-insta">Instagram / site (opcional)</label><input type="text" id="e-insta" placeholder="@perfil ou www.site.com.br"></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="e-indicador">Seu nome (quem indica) *</label><input type="text" id="e-indicador" placeholder="Ex: Maria Souza" required></div>
+          <div class="field"><label for="e-indicador-tel">Seu telefone (opcional)</label><input type="tel" id="e-indicador-tel" placeholder="(11) 99999-9999"></div>
+        </div>
+        <div class="field"><label for="e-obs">Por que indica? (opcional)</label><textarea id="e-obs" placeholder="Conte sua experiência com esse negócio…"></textarea></div>
+        <p class="form-note">* Campos obrigatórios. Indicações são revisadas antes de serem publicadas.</p>
+        <button type="submit" class="btn-submit emp-btn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Enviar indicação
+        </button>
+      </form>
+      <div class="form-success emp" id="succ-emp" role="alert">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <h3>Indicação recebida!</h3><p>Obrigado por contribuir. Revisaremos e publicaremos em breve.</p>
+      </div>
+    </section>
+    <div class="aviso"><strong>Importante:</strong> As indicações são enviadas pela comunidade. O responsável pelo site não valida as informações dos empreendedores.</div>
   </main>
 </div>
 
@@ -514,6 +601,10 @@ const DOCTORS = [
   { name:"Centro Neurológico Gramlich – Dr. Rogério Rocha", spec:"Neurologia", phones:["(11) 99350-6079"], address:"Alameda Nhambiquaras, 1770 – Conj. 602/604 – Indianapolis – São Paulo", extra:"" },
 ];
 
+/* ═══ ENTREPRENEURS DATA ═══ */
+const ENTREPRENEURS = [
+];
+
 /* ═══ COLORS ═══ */
 const CAT_COLORS = {
   "Ar condicionado":{"bg":"#E6F1FB","text":"#185FA5"},
@@ -549,6 +640,20 @@ const SPEC_COLORS = {
   "Neurologia":{"bg":"#EEEDFE","text":"#534AB7"},
 };
 
+const EMP_CAT_COLORS = {
+  "Alimentação":           {bg:"#FEF3C7",text:"#92400E"},
+  "Beleza e estética":     {bg:"#FBEAF0",text:"#883050"},
+  "Confecção e moda":      {bg:"#EEEDFE",text:"#534AB7"},
+  "Decoração e artesanato":{bg:"#FAEEDA",text:"#854F0B"},
+  "Educação e cursos":     {bg:"#E6F1FB",text:"#185FA5"},
+  "Informática e tecnologia":{bg:"#E6F1FB",text:"#185FA5"},
+  "Papelaria e gráfica":   {bg:"#F3EFFE",text:"#5B21B6"},
+  "Pet shop e animais":    {bg:"#EAF3DE",text:"#3B6D11"},
+  "Saúde e bem-estar":     {bg:"#EAF3DE",text:"#3B6D11"},
+  "Serviços gerais":       {bg:"#F1EFE8",text:"#5F5E5A"},
+  "Outro":                 {bg:"#F1EFE8",text:"#5F5E5A"},
+};
+
 const AVATARS = [
   {bg:"#EAF4EE",text:"#145530"},{bg:"#E6F1FB",text:"#185FA5"},
   {bg:"#EEEDFE",text:"#534AB7"},{bg:"#FBEAF0",text:"#883050"},
@@ -557,6 +662,7 @@ const AVATARS = [
 
 let activeServCat = "Todos";
 let activeMedCat  = "Todos";
+let activeEmpCat  = "Todos";
 let currentSection = "serv";
 
 function initials(name) {
@@ -570,7 +676,7 @@ function fixStickyTabs() {
 }
 
 function goToIndicar() {
-  const id = currentSection === "med" ? "indicar-med" : "indicar";
+  const id = currentSection === "med" ? "indicar-med" : currentSection === "emp" ? "indicar-emp" : "indicar";
   document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -578,15 +684,18 @@ function showSection(s) {
   currentSection = s;
   document.getElementById("section-serv").style.display = s==="serv" ? "" : "none";
   document.getElementById("section-med").style.display  = s==="med"  ? "" : "none";
+  document.getElementById("section-emp").style.display  = s==="emp"  ? "" : "none";
   document.getElementById("tab-serv").classList.toggle("active", s==="serv");
   document.getElementById("tab-med").classList.toggle("active", s==="med");
+  document.getElementById("tab-emp").classList.toggle("active", s==="emp");
   document.getElementById("search").value = "";
   filterAll();
 }
 
 function filterAll() {
   if (currentSection === "serv") filterServ();
-  else filterMed();
+  else if (currentSection === "med") filterMed();
+  else filterEmp();
 }
 
 /* ── PROFESSIONALS ── */
@@ -701,18 +810,76 @@ function filterMed() {
   }).join("");
 }
 
+/* ── ENTREPRENEURS ── */
+function renderEmpCats() {
+  const counts = {};
+  ENTREPRENEURS.forEach(e => { counts[e.cat]=(counts[e.cat]||0)+1; });
+  const cats = ["Todos",...[...new Set(ENTREPRENEURS.map(e=>e.cat))].sort()];
+  const sel = document.getElementById("cats-emp");
+  sel.innerHTML = cats.map(c => {
+    const count = c==="Todos" ? ENTREPRENEURS.length : (counts[c]||0);
+    return `<option value="${c}"${c===activeEmpCat?" selected":""}>${c} (${count})</option>`;
+  }).join("");
+  const badge = document.getElementById("badge-emp");
+  badge.textContent = activeEmpCat==="Todos" ? ENTREPRENEURS.length+" empreendedores" : counts[activeEmpCat]+" encontrados";
+}
+
+function setEmpCat(cat) { activeEmpCat=cat; renderEmpCats(); filterEmp(); }
+
+function filterEmp() {
+  const q = document.getElementById("search").value.toLowerCase().trim();
+  const filtered = ENTREPRENEURS.filter(e => {
+    const matchCat = activeEmpCat==="Todos" || e.cat===activeEmpCat;
+    const matchQ = !q || e.name.toLowerCase().includes(q) || e.service.toLowerCase().includes(q) || e.cat.toLowerCase().includes(q) || (e.address||"").toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+  const info = document.getElementById("results-emp");
+  info.innerHTML = (q||activeEmpCat!=="Todos") ? `<strong>${filtered.length}</strong> empreendedor${filtered.length!==1?"es":""} encontrado${filtered.length!==1?"s":""}` : "";
+  const grid = document.getElementById("grid-emp");
+  if (!filtered.length) {
+    grid.innerHTML=`<div class="empty"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><p>${ENTREPRENEURS.length===0?"Nenhum empreendedor cadastrado ainda. Seja o primeiro a indicar!":"Nenhum empreendedor encontrado."}</p></div>`;
+    return;
+  }
+  grid.innerHTML = filtered.map((e,i) => {
+    const av = AVATARS[i%AVATARS.length];
+    const cc = EMP_CAT_COLORS[e.cat]||{bg:"#F1EFE8",text:"#5F5E5A"};
+    const digits = (e.phone||"").replace(/\D/g,"");
+    const rid = slugify(e.name); const rv = getRating(rid);
+    return `<article class="card" role="listitem">
+      <div class="card-top">
+        <div class="avatar" style="background:${av.bg};color:${av.text}">${initials(e.name)}</div>
+        <div class="card-meta">
+          <div class="card-name">${e.name}</div>
+          <div class="card-service">${e.service}${e.address?` · ${e.address}`:""}</div>
+          ${e.instagram?`<div style="font-size:11px;color:var(--text-muted);margin-top:2px">${e.instagram}</div>`:""}
+        </div>
+        <span class="cat-tag" style="background:${cc.bg};color:${cc.text}">${e.cat}</span>
+      </div>
+      <div class="stars-row">
+        <span class="stars" onclick="openModal('${rid.replace(/'/g,"\'")}','${e.name.replace(/'/g,"\'")}','emp')" title="Clique para avaliar">${starsHtml(rv.avg)}</span>
+        ${rv.count>0?`<span class="rating-avg">${rv.avg.toFixed(1)}</span><span class="rating-info">(${rv.count} avaliação${rv.count>1?"ões":""})</span>`:`<span class="rating-info">Seja o primeiro a avaliar</span>`}
+      </div>
+      <div class="card-footer">
+        <div class="card-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>${e.phone||"Sem telefone"}</div>
+        ${digits.length>=8?`<a class="wpp-link" href="https://wa.me/55${digits}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:#1A7340"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>WhatsApp</a>`:""}
+      </div>
+    </article>`;
+  }).join("");
+}
+
 async function submitForm(e, type) {
   e.preventDefault();
-  const prefix = type==="serv" ? "s" : "m";
+  const prefix = type==="serv" ? "s" : type==="med" ? "m" : "e";
   const nome = document.getElementById(prefix+"-nome").value.trim();
-  const tel  = document.getElementById(type==="serv" ? "s-cel" : "m-tel").value.trim();
-  const cat  = document.getElementById(type==="serv" ? "s-cat" : "m-esp").value;
-  const serv = type==="serv" ? document.getElementById("s-serv").value.trim() : "";
-  const obs  = document.getElementById(type==="serv" ? "s-obs" : "m-obs").value.trim();
-  const end  = type==="med" ? document.getElementById("m-end").value.trim() : "";
-  const indicador = document.getElementById(type==="serv" ? "s-indicador" : "m-indicador").value.trim();
-  const indicadorTel = document.getElementById(type==="serv" ? "s-indicador-tel" : "m-indicador-tel").value.trim();
-  if (!nome || !tel || !cat || (type==="serv" && !serv) || !indicador) { alert("Por favor, preencha todos os campos obrigatórios."); return; }
+  const tel  = document.getElementById(type==="serv" ? "s-cel" : type==="med" ? "m-tel" : "e-cel").value.trim();
+  const cat  = document.getElementById(type==="serv" ? "s-cat" : type==="med" ? "m-esp" : "e-cat").value;
+  const serv = (type==="serv" || type==="emp") ? document.getElementById(type==="serv"?"s-serv":"e-serv").value.trim() : "";
+  const obs  = document.getElementById(prefix+"-obs").value.trim();
+  const end  = type==="med" ? document.getElementById("m-end").value.trim() : type==="emp" ? document.getElementById("e-end").value.trim() : "";
+  const insta = type==="emp" ? document.getElementById("e-insta").value.trim() : "";
+  const indicador = document.getElementById(prefix+"-indicador").value.trim();
+  const indicadorTel = document.getElementById(prefix+"-indicador-tel").value.trim();
+  if (!nome || !tel || !cat || ((type==="serv"||type==="emp") && !serv) || !indicador) { alert("Por favor, preencha todos os campos obrigatórios."); return; }
 
   const btn = e.target.querySelector(".btn-submit");
   const btnText = btn.innerHTML;
@@ -721,20 +888,17 @@ async function submitForm(e, type) {
 
   // Monta mensagem para o Formspree
   const formData = new FormData();
-  formData.append("_subject", type==="serv" ? `Nova indicação: ${nome}` : `Nova indicação médico: ${nome}`);
+  const subjects = {serv:`Nova indicação: ${nome}`, med:`Nova indicação médico: ${nome}`, emp:`Nova indicação empreendedor: ${nome}`};
+  formData.append("_subject", subjects[type]);
   formData.append("Nome", nome);
   formData.append("Telefone", tel);
-  if(type==="serv") {
-    formData.append("Serviço", serv);
-    formData.append("Categoria", cat);
-  } else {
-    formData.append("Especialidade", cat);
-    if(end) formData.append("Endereço", end);
-  }
+  if(type==="serv") { formData.append("Serviço", serv); formData.append("Categoria", cat); }
+  else if(type==="med") { formData.append("Especialidade", cat); if(end) formData.append("Endereço", end); }
+  else { formData.append("Produto/Serviço", serv); formData.append("Segmento", cat); if(end) formData.append("Endereço/Bairro", end); if(insta) formData.append("Instagram/Site", insta); }
   if(obs) formData.append("Observações", obs);
   formData.append("Indicado por", indicador);
   if(indicadorTel) formData.append("Telefone de quem indica", indicadorTel);
-  formData.append("Tipo", type==="serv" ? "Prestador de serviço" : "Médico/Especialista");
+  formData.append("Tipo", type==="serv" ? "Prestador de serviço" : type==="med" ? "Médico/Especialista" : "Pequeno empreendedor");
 
   try {
     const r = await fetch("https://formspree.io/f/mbdvkjqj", {
@@ -855,10 +1019,15 @@ document.addEventListener("DOMContentLoaded", function(){
   document.getElementById("stat-med-cats").textContent  = medCats.length;
   renderServCats();
   renderMedCats();
+  renderEmpCats();
+  document.getElementById("stat-emp-total").textContent = ENTREPRENEURS.length;
+  document.getElementById("stat-emp-cats").textContent = [...new Set(ENTREPRENEURS.map(e=>e.cat))].length;
   // Render cards immediately with empty ratings, then reload once JSONBin responds
   filterServ();
   loadRatings().then(() => {
-    if(currentSection==="serv") filterServ(); else filterMed();
+    if(currentSection==="serv") filterServ();
+    else if(currentSection==="med") filterMed();
+    else filterEmp();
   });
 
   document.getElementById("rating-modal").addEventListener("click", function(e){
