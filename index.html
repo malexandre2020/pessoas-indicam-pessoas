@@ -3,9 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Diretório de profissionais recomendados por quem já contratou. Encontre prestadores de serviço de confiança em São Paulo.">
-<meta property="og:title" content="Pessoas Indicam Pessoas">
-<meta property="og:description" content="Profissionais recomendados por quem já contratou.">
+<meta name="description" content="Diretório de profissionais e médicos recomendados por quem já contratou. Encontre prestadores de serviço e especialistas de confiança em São Paulo.">
 <title>Pessoas Indicam Pessoas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,396 +23,306 @@
     --accent-bg: #EAF4EE;
     --accent-border: #A8D5B5;
     --accent-text: #145530;
+    --accent-med: #185FA5;
+    --accent-med-bg: #E6F1FB;
+    --accent-med-border: #B5D4F4;
+    --accent-med-text: #0C447C;
     --radius: 10px;
     --shadow: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
     --shadow-md: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
   }
 
-  body {
-    font-family: 'Inter', -apple-system, sans-serif;
-    background: var(--bg);
-    color: var(--text-primary);
-    min-height: 100vh;
-    font-size: 15px;
-    line-height: 1.6;
-  }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text-primary); min-height: 100vh; font-size: 15px; line-height: 1.6; }
 
-  /* ── HEADER ── */
-  header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    position: sticky; top: 0; z-index: 100;
-  }
-  .header-inner {
-    max-width: 1100px; margin: 0 auto;
-    padding: 1rem 1.25rem;
-    display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
-  }
-  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
-  .logo-icon {
-    width: 38px; height: 38px; border-radius: 9px;
-    background: var(--accent-bg); border: 1px solid var(--accent-border);
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-  }
+  /* HEADER */
+  header { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+  .header-inner { max-width: 1100px; margin: 0 auto; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+  .logo-icon { width: 38px; height: 38px; border-radius: 9px; background: var(--accent-bg); border: 1px solid var(--accent-border); display: flex; align-items: center; justify-content: center; }
   .logo-icon svg { width: 20px; height: 20px; stroke: var(--accent); fill: none; stroke-width: 2; }
   .logo-text { font-size: 15px; font-weight: 600; color: var(--text-primary); }
   .logo-text span { color: var(--accent); }
-  .header-search {
-    flex: 1; min-width: 200px;
-    position: relative;
-  }
-  .header-search svg {
-    position: absolute; left: 11px; top: 50%; transform: translateY(-50%);
-    width: 16px; height: 16px; stroke: var(--text-muted); fill: none; stroke-width: 2;
-    pointer-events: none;
-  }
-  .header-search input {
-    width: 100%; padding: 9px 12px 9px 36px;
-    border: 1px solid var(--border); border-radius: var(--radius);
-    background: var(--bg); color: var(--text-primary);
-    font-size: 14px; font-family: inherit; outline: none;
-    transition: border-color .15s, box-shadow .15s;
-  }
-  .header-search input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(29,107,62,.12);
-  }
+  .header-search { flex: 1; min-width: 180px; position: relative; }
+  .header-search svg { position: absolute; left: 11px; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; stroke: var(--text-muted); fill: none; stroke-width: 2; pointer-events: none; }
+  .header-search input { width: 100%; padding: 9px 12px 9px 36px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); color: var(--text-primary); font-size: 14px; font-family: inherit; outline: none; transition: border-color .15s, box-shadow .15s; }
+  .header-search input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(29,107,62,.12); }
   .header-search input::placeholder { color: var(--text-muted); }
-
-  .btn-indicar {
-    flex-shrink: 0;
-    background: var(--accent); color: #fff;
-    border: none; border-radius: var(--radius);
-    padding: 9px 16px; font-size: 14px; font-weight: 500;
-    font-family: inherit; cursor: pointer;
-    text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
-    transition: background .15s;
-  }
+  .btn-indicar { flex-shrink: 0; background: var(--accent); color: #fff; border: none; border-radius: var(--radius); padding: 9px 16px; font-size: 14px; font-weight: 500; font-family: inherit; cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; transition: background .15s; }
   .btn-indicar:hover { background: #175c35; }
   .btn-indicar svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
-  /* ── HERO ── */
-  .hero {
-    background: linear-gradient(135deg, #1D6B3E 0%, #145530 100%);
-    color: #fff; text-align: center; padding: 3rem 1.25rem;
-  }
-  .hero h1 { font-size: 2rem; font-weight: 600; margin-bottom: .5rem; line-height: 1.25; }
-  .hero p { font-size: 1rem; opacity: .85; max-width: 480px; margin: 0 auto 1.5rem; }
-  .hero-stats {
-    display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap;
-  }
-  .hero-stat { text-align: center; }
-  .hero-stat-num { font-size: 1.5rem; font-weight: 600; }
-  .hero-stat-label { font-size: 12px; opacity: .7; margin-top: 2px; }
+  /* SECTION TABS */
+  .section-tabs { background: var(--surface); border-bottom: 1px solid var(--border); }
+  .tabs-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; display: flex; gap: 0; }
+  .tab-btn { padding: 12px 20px; font-size: 14px; font-weight: 500; font-family: inherit; border: none; background: none; cursor: pointer; color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .15s, border-color .15s; display: flex; align-items: center; gap: 7px; }
+  .tab-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+  .tab-btn:hover { color: var(--text-secondary); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-btn.active.med { color: var(--accent-med); border-bottom-color: var(--accent-med); }
 
-  /* ── CATEGORIES ── */
-  .cats-bar {
-    background: var(--surface); border-bottom: 1px solid var(--border);
-    overflow-x: auto; scrollbar-width: none;
-  }
+  /* HERO */
+  .hero { color: #fff; text-align: center; padding: 2.5rem 1.25rem; }
+  .hero.serv { background: linear-gradient(135deg, #1D6B3E 0%, #145530 100%); }
+  .hero.med  { background: linear-gradient(135deg, #185FA5 0%, #0C447C 100%); }
+  .hero h1 { font-size: 1.75rem; font-weight: 600; margin-bottom: .4rem; line-height: 1.25; }
+  .hero p { font-size: .9rem; opacity: .85; max-width: 460px; margin: 0 auto 1.25rem; }
+  .hero-stats { display: flex; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+  .hero-stat-num { font-size: 1.4rem; font-weight: 600; }
+  .hero-stat-label { font-size: 11px; opacity: .7; margin-top: 2px; }
+
+  /* CATEGORIES BAR */
+  .cats-bar { background: var(--surface); border-bottom: 1px solid var(--border); overflow-x: auto; scrollbar-width: none; }
   .cats-bar::-webkit-scrollbar { display: none; }
-  .cats-inner {
-    max-width: 1100px; margin: 0 auto;
-    padding: .6rem 1.25rem;
-    display: flex; gap: 6px;
-  }
-  .cat-btn {
-    flex-shrink: 0; border: 1px solid var(--border);
-    background: transparent; border-radius: 20px;
-    padding: 5px 14px; font-size: 13px; font-weight: 500;
-    cursor: pointer; color: var(--text-secondary);
-    display: flex; align-items: center; gap: 5px;
-    transition: all .15s; font-family: inherit;
-  }
+  .cats-inner { max-width: 1100px; margin: 0 auto; padding: .6rem 1.25rem; display: flex; gap: 6px; }
+  .cat-btn { flex-shrink: 0; border: 1px solid var(--border); background: transparent; border-radius: 20px; padding: 5px 14px; font-size: 13px; font-weight: 500; cursor: pointer; color: var(--text-secondary); display: flex; align-items: center; gap: 5px; transition: all .15s; font-family: inherit; }
   .cat-btn:hover { border-color: var(--accent); color: var(--accent); }
-  .cat-btn.active {
-    background: var(--accent-bg); border-color: var(--accent-border);
-    color: var(--accent-text);
-  }
-  .cat-btn .count {
-    background: var(--border); color: var(--text-muted);
-    border-radius: 20px; padding: 0 6px; font-size: 11px;
-  }
-  .cat-btn.active .count {
-    background: var(--accent-border); color: var(--accent-text);
-  }
+  .cat-btn.active { background: var(--accent-bg); border-color: var(--accent-border); color: var(--accent-text); }
+  .cat-btn.active.med { background: var(--accent-med-bg); border-color: var(--accent-med-border); color: var(--accent-med-text); }
+  .cat-btn .count { background: var(--border); color: var(--text-muted); border-radius: 20px; padding: 0 6px; font-size: 11px; }
+  .cat-btn.active .count { background: var(--accent-border); color: var(--accent-text); }
+  .cat-btn.active.med .count { background: var(--accent-med-border); color: var(--accent-med-text); }
 
-  /* ── MAIN ── */
+  /* MAIN */
   .main { max-width: 1100px; margin: 0 auto; padding: 1.25rem; }
-
-  .results-info {
-    font-size: 13px; color: var(--text-muted);
-    margin-bottom: 1rem;
-  }
+  .results-info { font-size: 13px; color: var(--text-muted); margin-bottom: 1rem; }
   .results-info strong { color: var(--text-secondary); }
 
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
-    gap: 12px;
-  }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; }
 
-  /* ── CARD ── */
-  .card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 12px; padding: 1rem;
-    box-shadow: var(--shadow);
-    transition: box-shadow .15s, border-color .15s;
-    display: flex; flex-direction: column; gap: 10px;
-  }
+  /* PROFESSIONAL CARD */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; box-shadow: var(--shadow); transition: box-shadow .15s, border-color .15s; display: flex; flex-direction: column; gap: 10px; }
   .card:hover { box-shadow: var(--shadow-md); border-color: var(--border-strong); }
-
   .card-top { display: flex; align-items: flex-start; gap: 10px; }
-  .avatar {
-    width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 600; letter-spacing: -.5px;
-  }
+  .avatar { width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; letter-spacing: -.5px; }
   .card-meta { flex: 1; min-width: 0; }
   .card-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
   .card-service { font-size: 12px; color: var(--text-secondary); margin-top: 2px; line-height: 1.4; }
-  .cat-tag {
-    font-size: 11px; font-weight: 500; padding: 3px 9px;
-    border-radius: 20px; flex-shrink: 0; white-space: nowrap;
-  }
-
-  .card-footer {
-    border-top: 1px solid var(--border); padding-top: 10px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .card-phone {
-    flex: 1; font-size: 13px; color: var(--text-secondary);
-    display: flex; align-items: center; gap: 5px;
-  }
+  .cat-tag { font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; flex-shrink: 0; white-space: nowrap; }
+  .card-footer { border-top: 1px solid var(--border); padding-top: 10px; display: flex; align-items: center; gap: 8px; }
+  .card-phone { flex: 1; font-size: 13px; color: var(--text-secondary); display: flex; align-items: center; gap: 5px; }
   .card-phone svg { width: 14px; height: 14px; stroke: var(--text-muted); fill: none; stroke-width: 2; flex-shrink: 0; }
-
-  .wpp-link {
-    flex-shrink: 0; display: inline-flex; align-items: center; gap: 5px;
-    background: #E7F8EE; color: #1A7340; border: 1px solid #A8D5B5;
-    border-radius: 7px; padding: 5px 11px; font-size: 12px; font-weight: 500;
-    text-decoration: none; transition: background .15s;
-  }
+  .wpp-link { flex-shrink: 0; display: inline-flex; align-items: center; gap: 5px; background: #E7F8EE; color: #1A7340; border: 1px solid #A8D5B5; border-radius: 7px; padding: 5px 11px; font-size: 12px; font-weight: 500; text-decoration: none; transition: background .15s; }
   .wpp-link:hover { background: #d0f0de; }
   .wpp-link svg { width: 14px; height: 14px; fill: #1A7340; }
 
-  /* ── EMPTY ── */
-  .empty {
-    grid-column: 1 / -1; text-align: center;
-    padding: 3rem 1rem; color: var(--text-muted);
-  }
-  .empty svg { width: 40px; height: 40px; stroke: var(--border-strong); fill: none; stroke-width: 1.5; margin-bottom: .75rem; }
+  /* DOCTOR CARD */
+  .doc-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem; box-shadow: var(--shadow); transition: box-shadow .15s, border-color .15s; }
+  .doc-card:hover { box-shadow: var(--shadow-md); border-color: var(--border-strong); }
+  .doc-top { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 10px; }
+  .doc-avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--accent-med-bg); color: var(--accent-med-text); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; }
+  .doc-meta { flex: 1; min-width: 0; }
+  .doc-name { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .doc-spec { font-size: 11px; font-weight: 500; padding: 3px 9px; border-radius: 20px; background: var(--accent-med-bg); color: var(--accent-med-text); border: 1px solid var(--accent-med-border); white-space: nowrap; flex-shrink: 0; }
+  .doc-details { display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: var(--text-secondary); border-top: 1px solid var(--border); padding-top: 9px; }
+  .doc-row { display: flex; align-items: flex-start; gap: 6px; }
+  .doc-row svg { width: 13px; height: 13px; stroke: var(--text-muted); fill: none; stroke-width: 2; flex-shrink: 0; margin-top: 2px; }
+  .doc-phones { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .doc-phone-num { font-size: 13px; color: var(--text-secondary); }
+
+  /* EMPTY */
+  .empty { grid-column: 1 / -1; text-align: center; padding: 3rem 1rem; color: var(--text-muted); }
+  .empty svg { width: 40px; height: 40px; stroke: var(--border-strong); fill: none; stroke-width: 1.5; margin-bottom: .75rem; display: block; margin-inline: auto; }
   .empty p { font-size: 14px; }
 
-  /* ── INDICAR SECTION ── */
-  .indicar-section {
-    margin-top: 2rem; background: var(--surface);
-    border: 1px solid var(--border); border-radius: 14px;
-    overflow: hidden;
-  }
-  .indicar-header {
-    background: var(--accent-bg); border-bottom: 1px solid var(--accent-border);
-    padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 12px;
-  }
-  .indicar-header svg { width: 22px; height: 22px; stroke: var(--accent); fill: none; stroke-width: 2; flex-shrink: 0; }
-  .indicar-header h2 { font-size: 16px; font-weight: 600; color: var(--accent-text); }
-  .indicar-header p { font-size: 13px; color: var(--accent-text); opacity: .75; }
-
+  /* INDICAR FORM */
+  .indicar-section { margin-top: 2rem; background: var(--surface); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+  .indicar-header { border-bottom: 1px solid var(--border); padding: 1.25rem 1.5rem; display: flex; align-items: center; gap: 12px; }
+  .indicar-header.serv { background: var(--accent-bg); border-bottom-color: var(--accent-border); }
+  .indicar-header.med  { background: var(--accent-med-bg); border-bottom-color: var(--accent-med-border); }
+  .indicar-header svg { width: 22px; height: 22px; fill: none; stroke-width: 2; flex-shrink: 0; }
+  .indicar-header.serv svg { stroke: var(--accent); }
+  .indicar-header.med  svg { stroke: var(--accent-med); }
+  .indicar-header h2 { font-size: 16px; font-weight: 600; }
+  .indicar-header.serv h2 { color: var(--accent-text); }
+  .indicar-header.med  h2 { color: var(--accent-med-text); }
+  .indicar-header p { font-size: 13px; opacity: .75; }
+  .indicar-header.serv p { color: var(--accent-text); }
+  .indicar-header.med  p { color: var(--accent-med-text); }
   .indicar-form { padding: 1.5rem; display: grid; gap: 12px; }
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  @media (max-width: 540px) { .form-row { grid-template-columns: 1fr; } }
-
   .field { display: flex; flex-direction: column; gap: 5px; }
   .field label { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
-  .field input, .field select, .field textarea {
-    width: 100%; padding: 9px 12px;
-    border: 1px solid var(--border); border-radius: var(--radius);
-    background: var(--bg); color: var(--text-primary);
-    font-size: 14px; font-family: inherit; outline: none;
-    transition: border-color .15s, box-shadow .15s;
-  }
-  .field input:focus, .field select:focus, .field textarea:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(29,107,62,.1);
-  }
+  .field input, .field select, .field textarea { width: 100%; padding: 9px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--bg); color: var(--text-primary); font-size: 14px; font-family: inherit; outline: none; transition: border-color .15s, box-shadow .15s; }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(29,107,62,.1); }
   .field textarea { resize: vertical; min-height: 80px; }
   .field select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%239C9A95' stroke-width='2' d='M2 4l4 4 4-4'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 32px; }
-
   .form-note { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
-
-  .btn-submit {
-    background: var(--accent); color: #fff;
-    border: none; border-radius: var(--radius);
-    padding: 11px 20px; font-size: 14px; font-weight: 500;
-    font-family: inherit; cursor: pointer;
-    display: inline-flex; align-items: center; gap: 7px;
-    transition: background .15s; width: fit-content;
-  }
+  .btn-submit { background: var(--accent); color: #fff; border: none; border-radius: var(--radius); padding: 11px 20px; font-size: 14px; font-weight: 500; font-family: inherit; cursor: pointer; display: inline-flex; align-items: center; gap: 7px; transition: background .15s; width: fit-content; }
   .btn-submit:hover { background: #175c35; }
+  .btn-submit.med { background: var(--accent-med); }
+  .btn-submit.med:hover { background: #0C447C; }
   .btn-submit svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2.5; }
-
-  .form-success {
-    display: none; padding: 1.5rem; text-align: center; color: var(--accent-text);
-  }
+  .form-success { display: none; padding: 1.5rem; text-align: center; }
   .form-success.visible { display: block; }
-  .form-success svg { width: 36px; height: 36px; stroke: var(--accent); fill: none; stroke-width: 2; margin-bottom: .5rem; }
+  .form-success svg { width: 36px; height: 36px; fill: none; stroke-width: 2; margin: 0 auto .5rem; display: block; }
+  .form-success.serv { color: var(--accent-text); }
+  .form-success.med  { color: var(--accent-med-text); }
+  .form-success.serv svg { stroke: var(--accent); }
+  .form-success.med  svg { stroke: var(--accent-med); }
   .form-success h3 { font-size: 16px; font-weight: 600; margin-bottom: .25rem; }
   .form-success p { font-size: 13px; opacity: .8; }
 
-  /* ── FOOTER ── */
-  footer {
-    margin-top: 3rem; border-top: 1px solid var(--border);
-    padding: 1.5rem 1.25rem; text-align: center;
-    font-size: 12px; color: var(--text-muted);
-  }
-  footer a { color: var(--text-muted); }
+  /* AVISO */
+  .aviso { margin-top: 1.5rem; padding: 1rem 1.1rem; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+  .aviso strong { color: var(--text-secondary); }
 
-  /* ── RESPONSIVE ── */
+  footer { margin-top: 3rem; border-top: 1px solid var(--border); padding: 1.5rem 1.25rem; text-align: center; font-size: 12px; color: var(--text-muted); }
+
   @media (max-width: 640px) {
-    .hero h1 { font-size: 1.5rem; }
+    .hero h1 { font-size: 1.35rem; }
     .hero-stats { gap: 1.5rem; }
-    .header-inner { gap: .75rem; }
     .logo-text { display: none; }
     .btn-indicar span { display: none; }
     .btn-indicar { padding: 9px 12px; }
+    .form-row { grid-template-columns: 1fr; }
+    .tab-btn { padding: 10px 14px; font-size: 13px; }
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    *, *::before, *::after { transition: none !important; }
-  }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition: none !important; } }
 </style>
 </head>
 <body>
 
-<!-- ── HEADER ── -->
 <header>
   <div class="header-inner">
-    <a href="#" class="logo">
+    <a href="#" class="logo" onclick="showSection('serv'); return false;">
       <div class="logo-icon">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
       </div>
       <span class="logo-text">Pessoas <span>Indicam</span> Pessoas</span>
     </a>
-
     <div class="header-search">
       <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <input type="text" id="search" placeholder="Buscar profissional ou serviço…" oninput="filterAll()" aria-label="Buscar profissional">
+      <input type="text" id="search" placeholder="Buscar por nome, serviço ou especialidade…" oninput="filterAll()" aria-label="Buscar">
     </div>
-
     <a href="#indicar" class="btn-indicar">
       <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-      <span>Indicar profissional</span>
+      <span>Indicar</span>
     </a>
   </div>
 </header>
 
-<!-- ── HERO ── -->
-<section class="hero" aria-label="Sobre o site">
-  <h1>Profissionais indicados<br>por quem já contratou</h1>
-  <p>Encontre prestadores de serviço de confiança, recomendados pela nossa comunidade desde 2023.</p>
-  <div class="hero-stats">
-    <div class="hero-stat">
-      <div class="hero-stat-num" id="stat-total">0</div>
-      <div class="hero-stat-label">profissionais</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num" id="stat-cats">0</div>
-      <div class="hero-stat-label">categorias</div>
-    </div>
-    <div class="hero-stat">
-      <div class="hero-stat-num">2023</div>
-      <div class="hero-stat-label">desde julho</div>
-    </div>
+<!-- SECTION TABS -->
+<nav class="section-tabs" aria-label="Seções">
+  <div class="tabs-inner">
+    <button class="tab-btn active" id="tab-serv" onclick="showSection('serv')">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+      Prestadores de serviço
+    </button>
+    <button class="tab-btn med" id="tab-med" onclick="showSection('med')">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+      Médicos e saúde
+    </button>
   </div>
-</section>
-
-<!-- ── CATEGORIES ── -->
-<nav class="cats-bar" aria-label="Filtrar por categoria">
-  <div class="cats-inner" id="cats"></div>
 </nav>
 
-<!-- ── MAIN ── -->
-<main class="main">
-  <p class="results-info" id="results-info" aria-live="polite"></p>
-  <div class="grid" id="grid" role="list"></div>
-
-  <!-- ── FORMULÁRIO DE INDICAÇÃO ── -->
-  <section class="indicar-section" id="indicar" aria-label="Formulário de indicação">
-    <div class="indicar-header">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      <div>
-        <h2>Indique um profissional</h2>
-        <p>Sua indicação ajuda toda a comunidade a encontrar bons prestadores.</p>
-      </div>
-    </div>
-
-    <form class="indicar-form" id="indicar-form" onsubmit="submitForm(event)" novalidate>
-      <div class="form-row">
-        <div class="field">
-          <label for="f-nome">Nome do profissional *</label>
-          <input type="text" id="f-nome" placeholder="Ex: João Silva" required>
-        </div>
-        <div class="field">
-          <label for="f-celular">Celular / contato *</label>
-          <input type="tel" id="f-celular" placeholder="(11) 99999-9999" required>
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="field">
-          <label for="f-servico">Serviço oferecido *</label>
-          <input type="text" id="f-servico" placeholder="Ex: Eletricista, Pintor…" required>
-        </div>
-        <div class="field">
-          <label for="f-cat">Categoria *</label>
-          <select id="f-cat" required>
-            <option value="">Selecione…</option>
-            <option>Ar condicionado</option>
-            <option>Automotivo</option>
-            <option>Beleza</option>
-            <option>Construção</option>
-            <option>Costura</option>
-            <option>Decoração</option>
-            <option>Eletrodomésticos</option>
-            <option>Elétrica</option>
-            <option>Eventos</option>
-            <option>Informática</option>
-            <option>Limpeza</option>
-            <option>Manutenção geral</option>
-            <option>Marcenaria</option>
-            <option>Pintura</option>
-            <option>Saúde &amp; fitness</option>
-            <option>Tapeçaria</option>
-            <option>Transporte</option>
-            <option>Vidraçaria</option>
-            <option>Outro</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="field">
-        <label for="f-obs">Observações (opcional)</label>
-        <textarea id="f-obs" placeholder="Conte por que você indica esse profissional, endereço, redes sociais…"></textarea>
-      </div>
-
-      <p class="form-note">
-        * Campos obrigatórios. As indicações enviadas aqui são revisadas antes de serem publicadas.
-        Este site não valida as informações dos profissionais — use seu próprio critério ao contratar.
-      </p>
-
-      <button type="submit" class="btn-submit">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-        Enviar indicação
-      </button>
-    </form>
-
-    <div class="form-success" id="form-success" role="alert">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
-      <h3>Indicação recebida!</h3>
-      <p>Obrigado por contribuir com a comunidade. Revisaremos e publicaremos em breve.</p>
+<!-- ═══ SERVIÇOS ═══ -->
+<div id="section-serv">
+  <section class="hero serv" aria-label="Sobre os prestadores de serviço">
+    <h1>Profissionais indicados<br>por quem já contratou</h1>
+    <p>Prestadores de serviço de confiança, recomendados pela comunidade desde 2023.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num" id="stat-total">0</div><div class="hero-stat-label">profissionais</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" id="stat-cats">0</div><div class="hero-stat-label">categorias</div></div>
+      <div class="hero-stat"><div class="hero-stat-num">2023</div><div class="hero-stat-label">desde julho</div></div>
     </div>
   </section>
-</main>
+  <nav class="cats-bar" aria-label="Filtrar serviços por categoria"><div class="cats-inner" id="cats-serv"></div></nav>
+  <main class="main">
+    <p class="results-info" id="results-serv" aria-live="polite"></p>
+    <div class="grid" id="grid-serv" role="list"></div>
+    <section class="indicar-section" id="indicar" aria-label="Indicar prestador de serviço">
+      <div class="indicar-header serv">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        <div><h2>Indique um profissional</h2><p>Sua indicação ajuda toda a comunidade.</p></div>
+      </div>
+      <form class="indicar-form" id="form-serv" onsubmit="submitForm(event,'serv')" novalidate>
+        <div class="form-row">
+          <div class="field"><label for="s-nome">Nome *</label><input type="text" id="s-nome" placeholder="Ex: João Silva" required></div>
+          <div class="field"><label for="s-cel">Celular *</label><input type="tel" id="s-cel" placeholder="(11) 99999-9999" required></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="s-serv">Serviço *</label><input type="text" id="s-serv" placeholder="Ex: Eletricista, Pintor…" required></div>
+          <div class="field"><label for="s-cat">Categoria *</label>
+            <select id="s-cat" required>
+              <option value="">Selecione…</option>
+              <option>Ar condicionado</option><option>Automotivo</option><option>Beleza</option>
+              <option>Construção</option><option>Costura</option><option>Decoração</option>
+              <option>Eletrodomésticos</option><option>Elétrica</option><option>Eventos</option>
+              <option>Informática</option><option>Limpeza</option><option>Manutenção geral</option>
+              <option>Marcenaria</option><option>Pintura</option><option>Saúde &amp; fitness</option>
+              <option>Tapeçaria</option><option>Transporte</option><option>Vidraçaria</option><option>Outro</option>
+            </select>
+          </div>
+        </div>
+        <div class="field"><label for="s-obs">Observações (opcional)</label><textarea id="s-obs" placeholder="Por que você indica? Endereço, redes sociais…"></textarea></div>
+        <p class="form-note">* Campos obrigatórios. Indicações são revisadas antes de serem publicadas.</p>
+        <button type="submit" class="btn-submit">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Enviar indicação
+        </button>
+      </form>
+      <div class="form-success serv" id="succ-serv" role="alert">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <h3>Indicação recebida!</h3><p>Obrigado por contribuir. Revisaremos e publicaremos em breve.</p>
+      </div>
+    </section>
+    <div class="aviso"><strong>Importante:</strong> As indicações são enviadas pela comunidade. O responsável pelo site não valida as informações dos profissionais. Use seu próprio critério ao contratar.</div>
+  </main>
+</div>
+
+<!-- ═══ MÉDICOS ═══ -->
+<div id="section-med" style="display:none">
+  <section class="hero med" aria-label="Sobre os médicos e especialistas">
+    <h1>Médicos e especialistas<br>recomendados pela comunidade</h1>
+    <p>Profissionais de saúde indicados por pacientes que já foram atendidos por eles.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="hero-stat-num" id="stat-med-total">0</div><div class="hero-stat-label">especialistas</div></div>
+      <div class="hero-stat"><div class="hero-stat-num" id="stat-med-cats">0</div><div class="hero-stat-label">especialidades</div></div>
+    </div>
+  </section>
+  <nav class="cats-bar" aria-label="Filtrar por especialidade"><div class="cats-inner" id="cats-med"></div></nav>
+  <main class="main">
+    <p class="results-info" id="results-med" aria-live="polite"></p>
+    <div class="grid" id="grid-med" role="list"></div>
+    <section class="indicar-section" id="indicar-med" aria-label="Indicar médico">
+      <div class="indicar-header med">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        <div><h2>Indique um médico ou especialista</h2><p>Ajude outras pessoas a encontrar bons profissionais de saúde.</p></div>
+      </div>
+      <form class="indicar-form" id="form-med" onsubmit="submitForm(event,'med')" novalidate>
+        <div class="form-row">
+          <div class="field"><label for="m-nome">Nome do médico *</label><input type="text" id="m-nome" placeholder="Ex: Dr. Carlos Silva" required></div>
+          <div class="field"><label for="m-tel">Telefone do consultório *</label><input type="tel" id="m-tel" placeholder="(11) 3333-4444" required></div>
+        </div>
+        <div class="form-row">
+          <div class="field"><label for="m-esp">Especialidade *</label>
+            <select id="m-esp" required>
+              <option value="">Selecione…</option>
+              <option>Cardiologia</option><option>Dermatologia</option><option>Endocrinologia</option>
+              <option>Fisioterapia</option><option>Gastroenterologia</option><option>Geriatria</option>
+              <option>Ginecologia</option><option>Neurologia</option><option>Oftalmologia</option>
+              <option>Ortopedia</option><option>Otorrinolaringologia</option><option>Pediatria</option>
+              <option>Psicologia</option><option>Psiquiatria</option><option>Reumatologia</option>
+              <option>Urologia</option><option>Vascular</option><option>Odontologia</option><option>Outra</option>
+            </select>
+          </div>
+          <div class="field"><label for="m-end">Endereço (opcional)</label><input type="text" id="m-end" placeholder="Rua, bairro…"></div>
+        </div>
+        <div class="field"><label for="m-obs">Por que indica? (opcional)</label><textarea id="m-obs" placeholder="Conte sua experiência, site, redes sociais…"></textarea></div>
+        <p class="form-note">* Campos obrigatórios. Indicações são revisadas antes de serem publicadas.</p>
+        <button type="submit" class="btn-submit med">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Enviar indicação
+        </button>
+      </form>
+      <div class="form-success med" id="succ-med" role="alert">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        <h3>Indicação recebida!</h3><p>Obrigado por contribuir. Revisaremos e publicaremos em breve.</p>
+      </div>
+    </section>
+    <div class="aviso"><strong>Importante:</strong> As indicações são enviadas pela comunidade. O responsável pelo site não valida as informações dos profissionais de saúde. Sempre consulte o CRM do médico antes de agendar.</div>
+  </main>
+</div>
 
 <footer>
   <p>Pessoas Indicam Pessoas · Desde julho de 2023 · São Paulo, SP</p>
@@ -422,11 +330,12 @@
 </footer>
 
 <script>
+/* ═══ PROFESSIONALS DATA ═══ */
 const PROFESSIONALS = [
-  { name:"Sr. José", service:"Manutenção geral – pintura, encanamento e outros serviços", phone:"(11) 97075-5014", cat:"Manutenção geral" },
+  { name:"Sr. José", service:"Manutenção geral – pintura, encanamento e outros", phone:"(11) 97075-5014", cat:"Manutenção geral" },
   { name:"Sandro", service:"Instalação e manutenção de ar condicionado", phone:"(11) 98208-5887", cat:"Ar condicionado" },
-  { name:"Pereira", service:"Manutenção geral – pintura, encanamento e outros serviços", phone:"(11) 99683-5991", cat:"Manutenção geral" },
-  { name:"Costureira Dona Francisca", service:"Troca de zíper, ajustes em geral, barras sob medida. Roupas masculinas, femininas e infantis.", phone:"(11) 98538-5881", cat:"Costura" },
+  { name:"Pereira", service:"Manutenção geral – pintura, encanamento e outros", phone:"(11) 99683-5991", cat:"Manutenção geral" },
+  { name:"Costureira Dona Francisca", service:"Troca de zíper, ajustes, barras sob medida. Roupas masculinas, femininas e infantis.", phone:"(11) 98538-5881", cat:"Costura" },
   { name:"Tapeçaria Art Point", service:"Tapeçaria em geral — Contato: Erick", phone:"(11) 97603-7284", cat:"Tapeçaria" },
   { name:"Lindomar", service:"Pedreiro", phone:"(11) 93929-6197", cat:"Construção" },
   { name:"Damião Sena", service:"Vidros e Box", phone:"(11) 96101-5205", cat:"Vidraçaria" },
@@ -446,7 +355,7 @@ const PROFESSIONALS = [
   { name:"Nilson", service:"Eletricista", phone:"(11) 98485-5191", cat:"Elétrica" },
   { name:"Lucas", service:"Tapeceiro", phone:"(11) 94741-9600", cat:"Tapeçaria" },
   { name:"Talita", service:"Tapeceiro", phone:"(11) 97305-7529", cat:"Tapeçaria" },
-  { name:"Mineiro Churrasco", service:"Churrasco completo para seu evento", phone:"(11) 96264-7773", cat:"Eventos" },
+  { name:"Mineiro Churrasco", service:"Churrasco completo para eventos", phone:"(11) 96264-7773", cat:"Eventos" },
   { name:"Sergio – Arte e Vida Tapeçaria", service:"Tapeceiro", phone:"(11) 98525-1968", cat:"Tapeçaria" },
   { name:"Wanderlei – Reforma Sofá", service:"Tapeçaria e reforma de sofás", phone:"(11) 98989-0692", cat:"Tapeçaria" },
   { name:"Rogério", service:"Vidraçaria", phone:"(11) 98303-1657", cat:"Vidraçaria" },
@@ -465,18 +374,16 @@ const PROFESSIONALS = [
   { name:"Costureira – Detalhe da Costura", service:"Costura em geral", phone:"(11) 3496-5161", cat:"Costura" },
   { name:"Daniel Moura – Assistência Técnica", service:"Máquina de lavar – Brastemp, Electrolux, Bosch e Consul", phone:"(11) 96205-9205", cat:"Eletrodomésticos" },
   { name:"Edesio – Assistência Técnica", service:"Máquina de lavar", phone:"(11) 97169-2138", cat:"Eletrodomésticos" },
-  { name:"Stefano – Informática", service:"Configuração de redes, wifi, computadores e celulares", phone:"(11) 99170-3359", cat:"Informática" },
+  { name:"Stefano – Informática", service:"Redes, wifi, computadores e celulares", phone:"(11) 99170-3359", cat:"Informática" },
   { name:"Marcos Brandao – Impressão Digital", service:"Gráfica rápida e comunicação visual", phone:"(11) 99643-7474", cat:"Manutenção geral" },
-  { name:"Blatt Fraldas (Susie)", service:"Tapetes higiênicos para pets", phone:"(11) 93296-7481", cat:"Manutenção geral" },
   { name:"DJ Leandro Naumes", service:"DJ, som e iluminação para eventos", phone:"(11) 99559-0336", cat:"Eventos" },
   { name:"Alessandra – Cabelereira", service:"Cortes de senhores e senhoras a domicílio", phone:"(11) 94521-1064", cat:"Beleza" },
   { name:"Luci Sales – Manicure", service:"Manicure e pedicure a domicílio", phone:"(11) 94901-5236", cat:"Beleza" },
   { name:"Laura – Uber", service:"Serviço de Uber", phone:"(11) 97164-5930", cat:"Transporte" },
-  { name:"Janaina Souza – Motorista", service:"Agendamento escolar, aeroporto, empresas e viagens. Aceita pets.", phone:"(11) 98903-5031", cat:"Transporte" },
-  { name:"CWD Informática", service:"Manutenção de notebooks, computadores e impressoras", phone:"", cat:"Informática" },
+  { name:"Janaina Souza – Motorista", service:"Agendamentos: escolar, aeroporto, empresas e viagens. Aceita pets.", phone:"(11) 98903-5031", cat:"Transporte" },
   { name:"Bivic Informática", service:"Manutenção de impressoras, recarga de toners e cartuchos", phone:"(11) 97444-9346", cat:"Informática" },
   { name:"Sidinei Impressoras", service:"Manutenção em impressoras", phone:"(11) 98201-6159", cat:"Informática" },
-  { name:"Edgard Peninha", service:"Manutenção geral e dedetização – baratas, formigas, traças e outros", phone:"(11) 98433-8113", cat:"Manutenção geral" },
+  { name:"Edgard Peninha", service:"Manutenção geral e dedetização – baratas, formigas, traças", phone:"(11) 98433-8113", cat:"Manutenção geral" },
   { name:"Paulo e Claudia – Churrasqueiro", service:"Churrasqueiro, copeira e garçonete (mão de obra)", phone:"(11) 98086-4819", cat:"Eventos" },
   { name:"Hélio Vasconcelos", service:"Ar condicionado", phone:"(11) 94794-4678", cat:"Ar condicionado" },
   { name:"Marquinhos Orelha – Van", service:"Serviço de van e transporte", phone:"(11) 94072-4213", cat:"Transporte" },
@@ -484,10 +391,10 @@ const PROFESSIONALS = [
   { name:"Sapateiro Thiago", service:"Sapataria – Av. Gen. Ataliba Leonel, 3659 – Tucuruvi", phone:"(11) 98621-4876", cat:"Manutenção geral" },
   { name:"Sapateiro Moacir", service:"Sapataria – R. Chico Pontes, 65 – Vila Guilherme", phone:"(11) 96315-8035", cat:"Manutenção geral" },
   { name:"Sapataria Real", service:"Sapataria – R. Amaral Gama, 383 – Santana", phone:"(11) 94613-1559", cat:"Manutenção geral" },
-  { name:"Jésus Bike – Bicicletaria", service:"Bicicletaria – R. Cap. Siqueira Barbosa, 123 – Parada Inglesa", phone:"(11) 2959-9053", cat:"Manutenção geral" },
-  { name:"Bontempi Bikes", service:"Bicicletaria – Av. Júlio Buono, 1004 – Vila Gustavo", phone:"(11) 96898-1412", cat:"Manutenção geral" },
+  { name:"Jésus Bike – Bicicletaria", service:"Bicicletaria – Parada Inglesa", phone:"(11) 2959-9053", cat:"Manutenção geral" },
+  { name:"Bontempi Bikes", service:"Bicicletaria – Vila Gustavo", phone:"(11) 96898-1412", cat:"Manutenção geral" },
   { name:"Crepe Silvio", service:"Crespes a domicílio para festas e eventos", phone:"(11) 99971-9139", cat:"Eventos" },
-  { name:"Buffet Ouro Crepe", service:"Qualidade e bom gosto para seu evento", phone:"(11) 98165-3834", cat:"Eventos" },
+  { name:"Buffet Ouro Crepe", service:"Buffet para eventos", phone:"(11) 98165-3834", cat:"Eventos" },
   { name:"Crepes Delice", service:"Crepes para eventos e festas", phone:"(11) 97300-1577", cat:"Eventos" },
   { name:"Moreira Tapeceiro", service:"Tapeçaria", phone:"(11) 98217-1367", cat:"Tapeçaria" },
   { name:"Só Sofá", service:"Tapeçaria e reforma de sofás", phone:"(11) 95702-5955", cat:"Tapeçaria" },
@@ -523,154 +430,225 @@ const PROFESSIONALS = [
   { name:"Eduardo – Câmeras CFTV", service:"Instalação de câmeras de segurança residenciais e empresas", phone:"(11) 96071-4492", cat:"Elétrica" },
 ];
 
-const CAT_COLORS = {
-  "Ar condicionado":  { bg:"#E6F1FB", text:"#185FA5" },
-  "Automotivo":       { bg:"#FCEBEB", text:"#A32D2D" },
-  "Beleza":           { bg:"#FBEAF0", text:"#883050" },
-  "Construção":       { bg:"#FAEEDA", text:"#854F0B" },
-  "Costura":          { bg:"#FBEAF0", text:"#883050" },
-  "Decoração":        { bg:"#EEEDFE", text:"#534AB7" },
-  "Eletrodomésticos": { bg:"#E6F1FB", text:"#185FA5" },
-  "Elétrica":         { bg:"#FAEEDA", text:"#854F0B" },
-  "Eventos":          { bg:"#EEEDFE", text:"#534AB7" },
-  "Informática":      { bg:"#E6F1FB", text:"#185FA5" },
-  "Limpeza":          { bg:"#EAF3DE", text:"#3B6D11" },
-  "Manutenção geral": { bg:"#F1EFE8", text:"#5F5E5A" },
-  "Marcenaria":       { bg:"#FAEEDA", text:"#854F0B" },
-  "Pintura":          { bg:"#E1F5EE", text:"#0F6E56" },
-  "Saúde & fitness":  { bg:"#EAF3DE", text:"#3B6D11" },
-  "Tapeçaria":        { bg:"#EEEDFE", text:"#534AB7" },
-  "Transporte":       { bg:"#E6F1FB", text:"#185FA5" },
-  "Vidraçaria":       { bg:"#E1F5EE", text:"#0F6E56" },
-};
-
-const AVATAR_PALETTE = [
-  { bg:"#EAF4EE", text:"#145530" },
-  { bg:"#E6F1FB", text:"#185FA5" },
-  { bg:"#EEEDFE", text:"#534AB7" },
-  { bg:"#FBEAF0", text:"#883050" },
-  { bg:"#FAEEDA", text:"#854F0B" },
-  { bg:"#E1F5EE", text:"#0F6E56" },
+/* ═══ DOCTORS DATA ═══ */
+const DOCTORS = [
+  { name:"Adriano Augusto Vasconcellos", spec:"Odontologia", phones:["(11) 2996-3965"], address:"Rua Mariquinha Sciascia, 39 – São Paulo", extra:"" },
+  { name:"Lumini Odontologia", spec:"Odontologia", phones:["(11) 99718-7559"], address:"Rua Parque Domingos Luis, 122 – Jardim São Paulo", extra:"luminiodontologia@terra.com.br" },
+  { name:"Dra. Heloisa", spec:"Odontologia", phones:["(11) 97310-5555"], address:"Praça Tenório Aguiar, 10 – Jardim São Paulo (Clínica Scheepmaker)", extra:"" },
+  { name:"Consultório Antunes Odontologia – Fernando Antunes", spec:"Odontologia", phones:["(11) 2955-5535","(11) 94467-3330"], address:"Av. Paulo Avelar, 103 – Vila Dom Pedro II – SP", extra:"" },
+  { name:"Jairo Anibal Mendes", spec:"Cardiologia", phones:["(11) 3531-6666"], address:"Rua Maria Amalia Lopez Azevedo, 147 – Clínica IMUVI, Tremembé – São Paulo", extra:"" },
+  { name:"Instituto Dr. Chao", spec:"Ortopedia", phones:["(11) 94336-6377"], address:"Maria Cândida, 1788 – Vila Guilherme – São Paulo", extra:"" },
+  { name:"Dr. Clóvis Castanho", spec:"Ortopedia", phones:["(11) 3057-1104","(11) 94603-5124","(11) 3256-1521"], address:"Dona Adma Jafet, 74 – São Paulo", extra:"Especialidade: Coluna · cloviscastanho.com.br · cloviscoluna@gmail.com" },
+  { name:"Dr. Leandro", spec:"Ortopedia", phones:["(11) 97320-9677"], address:"", extra:"Especialidade: Joelho" },
+  { name:"North Trauma e COTESP", spec:"Ortopedia", phones:["(11) 98985-3646"], address:"", extra:"Medicina Esportiva" },
+  { name:"Dr. Eduardo Alonso Nannini", spec:"Ortopedia", phones:["(11) 2950-3965","(11) 97270-3398"], address:"Av. Água Fria, 467 – cj 92 – Água Fria – São Paulo", extra:"Especialidade: Joelho · Dr. Gustavo Marchitto (Ombro) também atende neste consultório" },
+  { name:"Dr. Araken Quedas", spec:"Otorrinolaringologia", phones:["(11) 99164-0815","(11) 2659-7473"], address:"Av. General Ataliba Leonel, 1205 Sala 42 – Santana – São Paulo", extra:"" },
+  { name:"Dr. Marcos", spec:"Otorrinolaringologia", phones:["(11) 2372-6432"], address:"", extra:"" },
+  { name:"Dr. Adalberto Vainchelboim", spec:"Otorrinolaringologia", phones:["(11) 3826-8154","(11) 3825-6675"], address:"Av. Pacaembu, 1409 – Clínica Sepam – Pacaembu – São Paulo", extra:"" },
+  { name:"Dr. Taleb Abd Ali", spec:"Otorrinolaringologia", phones:["(11) 2337-3777","(11) 97958-0066","(11) 99648-5377"], address:"Av. Leôncio de Magalhães, 1004 Sala 52 – Jardim São Paulo", extra:"Adulto e Infantil" },
+  { name:"Dr. Celso", spec:"Dermatologia", phones:["(11) 2959-8405"], address:"Rua Voluntários da Pátria, 4370 Sala 114 – Mandaqui – São Paulo", extra:"" },
+  { name:"Dra. Talita", spec:"Dermatologia", phones:["(11) 2973-1212"], address:"Rua Salete, 200 – Santana – São Paulo", extra:"" },
+  { name:"Dra. Patricia Quispe", spec:"Dermatologia", phones:["(11) 94555-1208"], address:"Av. Nova Cantareira, 1984 – Tucuruvi – São Paulo", extra:"conceitodermatologia@gmail.com" },
+  { name:"Dra. Adriana", spec:"Dermatologia", phones:["(11) 99582-5188"], address:"", extra:"" },
+  { name:"Clínica Katia Volpe", spec:"Dermatologia", phones:["(11) 99837-3520","(11) 4306-3345"], address:"", extra:"" },
+  { name:"Maria Teresinha Zerlotini", spec:"Fisioterapia", phones:["(11) 99154-2450"], address:"Rua Duarte de Azevedo, 284 – Sala 42, Santana – SP", extra:"Fisioterapia Respiratória Infantil" },
+  { name:"Espaço Ranami – Melissa", spec:"Fisioterapia", phones:["(11) 98655-4311"], address:"", extra:"Drenagem linfática, shiatsu-tuina, auriculoterapia, cromoterapia, massagem relaxante" },
+  { name:"Dra. Karine Angélica D'Assumpção", spec:"Fisioterapia", phones:["(11) 99701-2181"], address:"Av. Nova Cantareira, 3882 – Tucuruvi – SP", extra:"@espaco_inhealth · karineinshape@gmail.com" },
+  { name:"Clínica Cantareira", spec:"Fisioterapia", phones:["(11) 2209-9040"], address:"Rua Cap. Francisco Lipi, 40 – Parada Inglesa – São Paulo", extra:"" },
+  { name:"SP | B-Active Alto de Santana", spec:"Fisioterapia", phones:["(11) 2978-8914","(11) 2950-6144"], address:"Rua Doutor Artur Guimarães, 154 – Santana – São Paulo", extra:"Academia Terapeuta" },
+  { name:"Dra. Bianca Verrastro Antunes", spec:"Geriatria", phones:["(11) 97548-7428"], address:"Av. Leôncio de Magalhães, 880 – 3º Andar – Jardim São Paulo", extra:"Clínica Médica e Geriatria" },
+  { name:"Dra. Rachele Tamika Petrizzo", spec:"Gastroenterologia", phones:["(11) 3172-6800"], address:"R. Voluntários da Pátria, 3997 – Santana – São Paulo", extra:"Atende nos consultórios do Hospital São Camilo" },
+  { name:"Dra. Heidi Feitoza", spec:"Vascular", phones:["(11) 5052-5222","(11) 95856-0186"], address:"Rua Vergueiro, 2045 – Conj. 804 – Vila Mariana – São Paulo", extra:"Cirurgiã Vascular com título de especialista pela SBACV · draheidifeitoza.com" },
+  { name:"Dr. Fernando Freua", spec:"Neurologia", phones:["(11) 99995-0433","(11) 3287-3247"], address:"R. Cubatão, 86 – Conjunto 409 – Vila Mariana – São Paulo", extra:"Neurologista pela USP. Atende no Hospital das Clínicas, Beneficência Portuguesa e Sírio-Libanês." },
+  { name:"Dra. Flávia Lima", spec:"Neurologia", phones:["(11) 99350-6079"], address:"", extra:"Neuropediatra · CRM-SP 152.824" },
+  { name:"Dr. Sidney Gomes", spec:"Neurologia", phones:["(11) 3505-1000","(11) 3505-5061"], address:"Rua Cap. Mor Roque Barreto, 47 – 1º Andar Sala 9 – Bela Vista – SP", extra:"CRM 77682 · Hospital Beneficência Portuguesa" },
+  { name:"Centro Neurológico Gramlich – Dr. Rogério Rocha", spec:"Neurologia", phones:["(11) 99350-6079"], address:"Alameda Nhambiquaras, 1770 – Conj. 602/604 – Indianapolis – São Paulo", extra:"" },
 ];
 
-let activeCategory = "Todos";
+/* ═══ COLORS ═══ */
+const CAT_COLORS = {
+  "Ar condicionado":{"bg":"#E6F1FB","text":"#185FA5"},
+  "Automotivo":{"bg":"#FCEBEB","text":"#A32D2D"},
+  "Beleza":{"bg":"#FBEAF0","text":"#883050"},
+  "Construção":{"bg":"#FAEEDA","text":"#854F0B"},
+  "Costura":{"bg":"#FBEAF0","text":"#883050"},
+  "Decoração":{"bg":"#EEEDFE","text":"#534AB7"},
+  "Eletrodomésticos":{"bg":"#E6F1FB","text":"#185FA5"},
+  "Elétrica":{"bg":"#FAEEDA","text":"#854F0B"},
+  "Eventos":{"bg":"#EEEDFE","text":"#534AB7"},
+  "Informática":{"bg":"#E6F1FB","text":"#185FA5"},
+  "Limpeza":{"bg":"#EAF3DE","text":"#3B6D11"},
+  "Manutenção geral":{"bg":"#F1EFE8","text":"#5F5E5A"},
+  "Marcenaria":{"bg":"#FAEEDA","text":"#854F0B"},
+  "Pintura":{"bg":"#E1F5EE","text":"#0F6E56"},
+  "Saúde & fitness":{"bg":"#EAF3DE","text":"#3B6D11"},
+  "Tapeçaria":{"bg":"#EEEDFE","text":"#534AB7"},
+  "Transporte":{"bg":"#E6F1FB","text":"#185FA5"},
+  "Vidraçaria":{"bg":"#E1F5EE","text":"#0F6E56"},
+};
+
+const SPEC_COLORS = {
+  "Odontologia":{"bg":"#E6F1FB","text":"#185FA5"},
+  "Cardiologia":{"bg":"#FCEBEB","text":"#A32D2D"},
+  "Ortopedia":{"bg":"#FAEEDA","text":"#854F0B"},
+  "Otorrinolaringologia":{"bg":"#EEEDFE","text":"#534AB7"},
+  "Dermatologia":{"bg":"#FBEAF0","text":"#883050"},
+  "Fisioterapia":{"bg":"#EAF3DE","text":"#3B6D11"},
+  "Geriatria":{"bg":"#E1F5EE","text":"#0F6E56"},
+  "Gastroenterologia":{"bg":"#FAEEDA","text":"#854F0B"},
+  "Vascular":{"bg":"#FCEBEB","text":"#A32D2D"},
+  "Neurologia":{"bg":"#EEEDFE","text":"#534AB7"},
+};
+
+const AVATARS = [
+  {bg:"#EAF4EE",text:"#145530"},{bg:"#E6F1FB",text:"#185FA5"},
+  {bg:"#EEEDFE",text:"#534AB7"},{bg:"#FBEAF0",text:"#883050"},
+  {bg:"#FAEEDA",text:"#854F0B"},{bg:"#E1F5EE",text:"#0F6E56"},
+];
+
+let activeServCat = "Todos";
+let activeMedCat  = "Todos";
+let currentSection = "serv";
 
 function initials(name) {
-  const parts = name.replace(/[^a-zA-ZÀ-ÿ\s]/g, '').trim().split(/\s+/);
-  return parts.slice(0, 2).map(w => w[0] || '').join('').toUpperCase() || '?';
+  return name.replace(/[^a-zA-ZÀ-ÿ\s]/g,"").trim().split(/\s+/).slice(0,2).map(w=>w[0]||"").join("").toUpperCase() || "?";
 }
 
-function fmtPhone(raw) {
-  return raw.replace(/\D/g, '');
-}
-
-function getCategories() {
-  const cats = [...new Set(PROFESSIONALS.map(p => p.cat))].sort();
-  return ["Todos", ...cats];
-}
-
-function renderCats() {
-  const cats = getCategories();
-  const counts = {};
-  PROFESSIONALS.forEach(p => { counts[p.cat] = (counts[p.cat] || 0) + 1; });
-  const totalAll = PROFESSIONALS.length;
-
-  document.getElementById('cats').innerHTML = cats.map(c => {
-    const count = c === "Todos" ? totalAll : (counts[c] || 0);
-    const active = c === activeCategory ? ' active' : '';
-    return `<button class="cat-btn${active}" onclick="setCategory('${c.replace(/'/g,"\\'")}')">
-      ${c} <span class="count">${count}</span>
-    </button>`;
-  }).join('');
-}
-
-function setCategory(cat) {
-  activeCategory = cat;
-  renderCats();
+/* ── SECTION SWITCH ── */
+function showSection(s) {
+  currentSection = s;
+  document.getElementById("section-serv").style.display = s==="serv" ? "" : "none";
+  document.getElementById("section-med").style.display  = s==="med"  ? "" : "none";
+  document.getElementById("tab-serv").classList.toggle("active", s==="serv");
+  document.getElementById("tab-med").classList.toggle("active", s==="med");
+  document.getElementById("search").value = "";
   filterAll();
 }
 
 function filterAll() {
-  const q = document.getElementById('search').value.toLowerCase().trim();
+  if (currentSection === "serv") filterServ();
+  else filterMed();
+}
+
+/* ── PROFESSIONALS ── */
+function renderServCats() {
+  const counts = {};
+  PROFESSIONALS.forEach(p => { counts[p.cat] = (counts[p.cat]||0)+1; });
+  const cats = ["Todos", ...[...new Set(PROFESSIONALS.map(p=>p.cat))].sort()];
+  document.getElementById("cats-serv").innerHTML = cats.map(c => {
+    const count = c==="Todos" ? PROFESSIONALS.length : (counts[c]||0);
+    return `<button class="cat-btn${c===activeServCat?" active":""}" onclick="setServCat('${c.replace(/'/g,"\\'")}')">
+      ${c} <span class="count">${count}</span></button>`;
+  }).join("");
+}
+
+function setServCat(cat) { activeServCat=cat; renderServCats(); filterServ(); }
+
+function filterServ() {
+  const q = document.getElementById("search").value.toLowerCase().trim();
   const filtered = PROFESSIONALS.filter(p => {
-    const matchCat = activeCategory === "Todos" || p.cat === activeCategory;
+    const matchCat = activeServCat==="Todos" || p.cat===activeServCat;
     const matchQ = !q || p.name.toLowerCase().includes(q) || p.service.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q);
     return matchCat && matchQ;
   });
-
-  const info = document.getElementById('results-info');
-  if (q || activeCategory !== "Todos") {
-    info.innerHTML = `<strong>${filtered.length}</strong> profissional${filtered.length !== 1 ? 'is' : ''} encontrado${filtered.length !== 1 ? 's' : ''}`;
-  } else {
-    info.innerHTML = '';
-  }
-
-  const grid = document.getElementById('grid');
-  if (!filtered.length) {
-    grid.innerHTML = `<div class="empty">
-      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      <p>Nenhum profissional encontrado. Tente outro termo ou categoria.</p>
-    </div>`;
-    return;
-  }
-
-  grid.innerHTML = filtered.map((p, i) => {
-    const av = AVATAR_PALETTE[i % AVATAR_PALETTE.length];
-    const cc = CAT_COLORS[p.cat] || { bg:"#F1EFE8", text:"#5F5E5A" };
-    const phoneDigits = fmtPhone(p.phone);
-    const hasPhone = phoneDigits.length >= 8;
-
+  const info = document.getElementById("results-serv");
+  info.innerHTML = (q||activeServCat!=="Todos") ? `<strong>${filtered.length}</strong> profissional${filtered.length!==1?"is":""} encontrado${filtered.length!==1?"s":""}` : "";
+  const grid = document.getElementById("grid-serv");
+  if (!filtered.length) { grid.innerHTML=`<div class="empty"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><p>Nenhum profissional encontrado.</p></div>`; return; }
+  grid.innerHTML = filtered.map((p,i) => {
+    const av = AVATARS[i%AVATARS.length];
+    const cc = CAT_COLORS[p.cat]||{bg:"#F1EFE8",text:"#5F5E5A"};
+    const digits = p.phone.replace(/\D/g,"");
     return `<article class="card" role="listitem">
       <div class="card-top">
-        <div class="avatar" style="background:${av.bg};color:${av.text}" aria-hidden="true">${initials(p.name)}</div>
-        <div class="card-meta">
-          <div class="card-name">${p.name}</div>
-          <div class="card-service">${p.service}</div>
-        </div>
+        <div class="avatar" style="background:${av.bg};color:${av.text}">${initials(p.name)}</div>
+        <div class="card-meta"><div class="card-name">${p.name}</div><div class="card-service">${p.service}</div></div>
         <span class="cat-tag" style="background:${cc.bg};color:${cc.text}">${p.cat}</span>
       </div>
       <div class="card-footer">
-        <div class="card-phone">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          ${p.phone || 'Sem telefone cadastrado'}
-        </div>
-        ${hasPhone ? `<a class="wpp-link" href="https://wa.me/55${phoneDigits}" target="_blank" rel="noopener" aria-label="Contatar ${p.name} via WhatsApp">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-          WhatsApp
-        </a>` : ''}
+        <div class="card-phone"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>${p.phone}</div>
+        ${digits.length>=8?`<a class="wpp-link" href="https://wa.me/55${digits}" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>WhatsApp</a>`:""}
       </div>
     </article>`;
-  }).join('');
+  }).join("");
 }
 
-function submitForm(e) {
+/* ── DOCTORS ── */
+function renderMedCats() {
+  const counts = {};
+  DOCTORS.forEach(d => { counts[d.spec]=(counts[d.spec]||0)+1; });
+  const cats = ["Todos",...[...new Set(DOCTORS.map(d=>d.spec))].sort()];
+  document.getElementById("cats-med").innerHTML = cats.map(c => {
+    const count = c==="Todos" ? DOCTORS.length : (counts[c]||0);
+    return `<button class="cat-btn${c===activeMedCat?" active med":""}" onclick="setMedCat('${c.replace(/'/g,"\\'")}')">
+      ${c} <span class="count">${count}</span></button>`;
+  }).join("");
+}
+
+function setMedCat(cat) { activeMedCat=cat; renderMedCats(); filterMed(); }
+
+function filterMed() {
+  const q = document.getElementById("search").value.toLowerCase().trim();
+  const filtered = DOCTORS.filter(d => {
+    const matchCat = activeMedCat==="Todos" || d.spec===activeMedCat;
+    const matchQ = !q || d.name.toLowerCase().includes(q) || d.spec.toLowerCase().includes(q) || d.address.toLowerCase().includes(q) || d.extra.toLowerCase().includes(q);
+    return matchCat && matchQ;
+  });
+  const info = document.getElementById("results-med");
+  info.innerHTML = (q||activeMedCat!=="Todos") ? `<strong>${filtered.length}</strong> especialista${filtered.length!==1?"s":""} encontrado${filtered.length!==1?"s":""}` : "";
+  const grid = document.getElementById("grid-med");
+  if (!filtered.length) { grid.innerHTML=`<div class="empty"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><p>Nenhum especialista encontrado.</p></div>`; return; }
+
+  grid.innerHTML = filtered.map((d,i) => {
+    const sc = SPEC_COLORS[d.spec]||{bg:"#E6F1FB",text:"#185FA5"};
+    const primaryPhone = d.phones[0]||"";
+    const primaryDigits = primaryPhone.replace(/\D/g,"");
+    const extraPhones = d.phones.slice(1);
+    return `<article class="doc-card" role="listitem">
+      <div class="doc-top">
+        <div class="doc-avatar">${initials(d.name)}</div>
+        <div class="doc-meta">
+          <div class="card-name">${d.name}</div>
+          ${d.extra ? `<div class="card-service" style="margin-top:2px">${d.extra}</div>` : ""}
+        </div>
+        <span class="doc-spec" style="background:${sc.bg};color:${sc.text};border-color:${sc.bg}">${d.spec}</span>
+      </div>
+      <div class="doc-details">
+        ${primaryPhone ? `<div class="doc-phones">
+          <div class="doc-row" style="flex-shrink:0"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <span class="doc-phone-num">${d.phones.join(" · ")}</span>
+          ${primaryDigits.length>=8?`<a class="wpp-link" href="https://wa.me/55${primaryDigits}" target="_blank" rel="noopener" style="margin-left:auto"><svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:#1A7340"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>WhatsApp</a>`:""}
+        </div>` : ""}
+        ${d.address ? `<div class="doc-row"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span>${d.address}</span></div>` : ""}
+      </div>
+    </article>`;
+  }).join("");
+}
+
+function submitForm(e, type) {
   e.preventDefault();
-  const nome = document.getElementById('f-nome').value.trim();
-  const celular = document.getElementById('f-celular').value.trim();
-  const servico = document.getElementById('f-servico').value.trim();
-  const cat = document.getElementById('f-cat').value;
-
-  if (!nome || !celular || !servico || !cat) {
-    alert('Por favor, preencha todos os campos obrigatórios.');
-    return;
-  }
-
-  // In a real deployment, send this to a backend or email service
-  // For now, we just show the success message
-  document.getElementById('indicar-form').style.display = 'none';
-  document.getElementById('form-success').classList.add('visible');
-
-  // Scroll to success message
-  document.getElementById('form-success').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const prefix = type==="serv" ? "s" : "m";
+  const nome = document.getElementById(prefix+"-nome").value.trim();
+  const tel  = document.getElementById(type==="serv" ? "s-cel" : "m-tel").value.trim();
+  const cat  = document.getElementById(type==="serv" ? "s-cat" : "m-esp").value;
+  const serv = type==="serv" ? document.getElementById("s-serv").value.trim() : "ok";
+  if (!nome || !tel || !cat || !serv) { alert("Por favor, preencha todos os campos obrigatórios."); return; }
+  document.getElementById("form-"+type).style.display = "none";
+  const succ = document.getElementById("succ-"+type);
+  succ.classList.add("visible");
+  succ.scrollIntoView({behavior:"smooth",block:"center"});
 }
 
-// ── INIT ──
+/* ── INIT ── */
 (function init() {
-  const uniqueCats = [...new Set(PROFESSIONALS.map(p => p.cat))];
-  document.getElementById('stat-total').textContent = PROFESSIONALS.length;
-  document.getElementById('stat-cats').textContent = uniqueCats.length;
-  renderCats();
-  filterAll();
+  const servCats = [...new Set(PROFESSIONALS.map(p=>p.cat))];
+  const medCats  = [...new Set(DOCTORS.map(d=>d.spec))];
+  document.getElementById("stat-total").textContent = PROFESSIONALS.length;
+  document.getElementById("stat-cats").textContent  = servCats.length;
+  document.getElementById("stat-med-total").textContent = DOCTORS.length;
+  document.getElementById("stat-med-cats").textContent  = medCats.length;
+  renderServCats(); filterServ();
+  renderMedCats();
 })();
 </script>
 </body>
