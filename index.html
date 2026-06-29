@@ -52,7 +52,7 @@
   .btn-indicar svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2.5; }
 
   /* SECTION TABS */
-  .section-tabs { background: var(--surface); border-bottom: 1px solid var(--border); }
+  .section-tabs { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 99; }
   .tabs-inner { max-width: 1100px; margin: 0 auto; padding: 0 1.25rem; display: flex; gap: 0; }
   .tab-btn { padding: 12px 20px; font-size: 14px; font-weight: 500; font-family: inherit; border: none; background: none; cursor: pointer; color: var(--text-muted); border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color .15s, border-color .15s; display: flex; align-items: center; gap: 7px; }
   .tab-btn svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
@@ -564,6 +564,11 @@ function initials(name) {
 }
 
 /* ── SECTION SWITCH ── */
+function fixStickyTabs() {
+  const h = document.querySelector("header").offsetHeight;
+  document.querySelector(".section-tabs").style.top = h + "px";
+}
+
 function goToIndicar() {
   const id = currentSection === "med" ? "indicar-med" : "indicar";
   document.getElementById(id).scrollIntoView({ behavior: "smooth", block: "start" });
@@ -839,6 +844,8 @@ function updateModalStars(v){
 }
 
 document.addEventListener("DOMContentLoaded", function(){
+  fixStickyTabs();
+  window.addEventListener('resize', fixStickyTabs);
   // Init stats and categories
   const servCats = [...new Set(PROFESSIONALS.map(p=>p.cat))];
   const medCats  = [...new Set(DOCTORS.map(d=>d.spec))];
