@@ -603,7 +603,7 @@ const DOCTORS = [
 
 /* ═══ ENTREPRENEURS DATA ═══ */
 const ENTREPRENEURS = [
-  { name:"Lastro D'Ouro", service:"Pães e Caldos Caseiros – Receitas caseiras desde 2019", phone:"(11) 97871-6452", cat:"Alimentação", address:"", instagram:"@lastrodouro · instagram.com/lastrodouro" },
+  { name:"Lastro D'Ouro", service:"Pães e Caldos Caseiros – Receitas caseiras desde 2019", phone:"(11) 97871-6452", cat:"Alimentação", address:"", instagram:"https://www.instagram.com/lastrodouro" },
 ];
 
 /* ═══ COLORS ═══ */
@@ -852,7 +852,7 @@ function filterEmp() {
         <div class="card-meta">
           <div class="card-name">${e.name}</div>
           <div class="card-service">${e.service}${e.address?` · ${e.address}`:""}</div>
-          ${e.instagram?`<div style="font-size:11px;color:var(--text-muted);margin-top:2px">${e.instagram}</div>`:""}
+          ${e.instagram?`<a href="${e.instagram}" target="_blank" rel="noopener" style="font-size:11px;color:#E1306C;margin-top:3px;display:inline-flex;align-items:center;gap:4px;text-decoration:none;font-weight:500"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#E1306C" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="#E1306C" stroke="none"/></svg>Instagram</a>`:""}
         </div>
         <span class="cat-tag" style="background:${cc.bg};color:${cc.text}">${e.cat}</span>
       </div>
