@@ -206,6 +206,37 @@
 
   footer { margin-top: 3rem; border-top: 1px solid var(--border); padding: 1.5rem 1.25rem; text-align: center; font-size: 12px; color: var(--text-muted); }
 
+  /* FOOTER CONTACT */
+  .footer-contact { max-width: 1100px; margin: 0 auto 1.5rem; padding: 0 1.25rem; }
+  .footer-contact-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .footer-contact-info h3 { font-size: 14px; font-weight: 600; color: var(--text-primary); margin-bottom: 3px; }
+  .footer-contact-info p { font-size: 13px; color: var(--text-secondary); }
+  .footer-contact-info p span { color: var(--accent); font-weight: 500; }
+  .footer-contact-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-footer { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: var(--radius); font-size: 13px; font-weight: 500; font-family: inherit; cursor: pointer; text-decoration: none; border: none; transition: background .15s; white-space: nowrap; }
+  .btn-footer-primary { background: var(--accent); color: #fff; }
+  .btn-footer-primary:hover { background: #175c35; }
+  .btn-footer-secondary { background: var(--accent-bg); color: var(--accent-text); border: 1px solid var(--accent-border); }
+  .btn-footer-secondary:hover { background: #d5eede; }
+  .btn-footer svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+  /* CONTACT MODAL */
+  .contact-modal { position:fixed; inset:0; background:rgba(0,0,0,.45); z-index:999; display:flex; align-items:center; justify-content:center; padding:1rem; }
+  .contact-box { background:var(--surface); border-radius:14px; padding:1.5rem; max-width:420px; width:100%; box-shadow:0 8px 32px rgba(0,0,0,.18); }
+  .contact-box h3 { font-size:16px; font-weight:600; margin-bottom:.25rem; }
+  .contact-box p { font-size:13px; color:var(--text-secondary); margin-bottom:1rem; }
+  .contact-fields { display:flex; flex-direction:column; gap:10px; margin-bottom:1rem; }
+  .contact-fields input, .contact-fields textarea, .contact-fields select { width:100%; padding:9px 12px; border:1px solid var(--border); border-radius:var(--radius); background:var(--bg); color:var(--text-primary); font-size:14px; font-family:inherit; outline:none; transition:border-color .15s; }
+  .contact-fields input:focus, .contact-fields textarea:focus, .contact-fields select:focus { border-color:var(--accent); box-shadow:0 0 0 3px rgba(29,107,62,.1); }
+  .contact-fields textarea { resize:vertical; min-height:90px; }
+  .contact-fields select { appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%239C9A95' stroke-width='2' d='M2 4l4 4 4-4'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; padding-right:32px; }
+  .contact-modal-actions { display:flex; gap:8px; justify-content:flex-end; }
+  .contact-success { display:none; text-align:center; padding:.5rem 0; }
+  .contact-success.visible { display:block; }
+  .contact-success svg { width:32px; height:32px; stroke:var(--accent); fill:none; stroke-width:2; margin:0 auto .5rem; display:block; }
+  .contact-success h4 { font-size:15px; font-weight:600; color:var(--accent-text); }
+  .contact-success p { font-size:13px; color:var(--text-secondary); margin-top:3px; }
+
   @media (max-width: 640px) {
     .hero h1 { font-size: 1.35rem; }
     .hero-stats { gap: 1.5rem; }
@@ -460,7 +491,57 @@
   </div>
 </div>
 
+<!-- CONTACT MODAL -->
+<div class="contact-modal" id="contact-modal" style="display:none" role="dialog" aria-modal="true">
+  <div class="contact-box">
+    <h3>Entre em contato</h3>
+    <p>Fale com o responsável pelo site ou tire suas dúvidas.</p>
+    <div id="contact-form-wrap">
+      <div class="contact-fields">
+        <input type="text" id="c-nome" placeholder="Seu nome *">
+        <input type="email" id="c-email" placeholder="Seu e-mail *">
+        <input type="tel" id="c-tel" placeholder="Seu telefone (opcional)">
+        <select id="c-assunto">
+          <option value="">Assunto *</option>
+          <option value="Dúvida sobre o site">Dúvida sobre o site</option>
+          <option value="Quero criar um site">Quero criar um site</option>
+          <option value="Indicação de profissional">Indicação de profissional</option>
+          <option value="Outro assunto">Outro assunto</option>
+        </select>
+        <textarea id="c-msg" placeholder="Sua mensagem *"></textarea>
+      </div>
+      <div class="contact-modal-actions">
+        <button class="btn-cancel" onclick="closeContactModal()">Cancelar</button>
+        <button class="btn-confirm" onclick="submitContact()">Enviar mensagem</button>
+      </div>
+    </div>
+    <div class="contact-success" id="contact-success">
+      <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+      <h4>Mensagem enviada!</h4>
+      <p>Obrigado pelo contato. Retornaremos em breve.</p>
+    </div>
+  </div>
+</div>
+
 <footer>
+  <div class="footer-contact">
+    <div class="footer-contact-box">
+      <div class="footer-contact-info">
+        <h3>Fale com o responsável pelo site</h3>
+        <p>Dúvidas, sugestões ou <span>quer criar um site como este?</span> Entre em contato!</p>
+      </div>
+      <div class="footer-contact-actions">
+        <button class="btn-footer btn-footer-secondary" onclick="openContactModal('Quero criar um site')">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Quero um site
+        </button>
+        <button class="btn-footer btn-footer-primary" onclick="openContactModal('')">
+          <svg viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          Enviar mensagem
+        </button>
+      </div>
+    </div>
+  </div>
   <p>Pessoas Indicam Pessoas · Desde julho de 2023 · São Paulo, SP</p>
   <p style="margin-top:.25rem">As indicações são enviadas pela comunidade. O responsável pelo site não valida as informações.</p>
 </footer>
@@ -1056,6 +1137,61 @@ async function confirmRating(){
   if(modalType==="serv") filterServ(); else filterMed();
 }
 
+
+/* ── CONTACT MODAL ── */
+function openContactModal(assunto) {
+  if(assunto) document.getElementById("c-assunto").value = assunto;
+  document.getElementById("contact-modal").style.display = "flex";
+  document.body.style.overflow = "hidden";
+}
+
+function closeContactModal() {
+  document.getElementById("contact-modal").style.display = "none";
+  document.body.style.overflow = "";
+}
+
+document.addEventListener("DOMContentLoaded", function(){
+  document.getElementById("contact-modal").addEventListener("click", function(e){
+    if(e.target === this) closeContactModal();
+  });
+});
+
+async function submitContact() {
+  const nome    = document.getElementById("c-nome").value.trim();
+  const email   = document.getElementById("c-email").value.trim();
+  const tel     = document.getElementById("c-tel").value.trim();
+  const assunto = document.getElementById("c-assunto").value;
+  const msg     = document.getElementById("c-msg").value.trim();
+  if(!nome || !email || !assunto || !msg) { alert("Por favor, preencha todos os campos obrigatórios."); return; }
+
+  const btn = document.querySelector("#contact-form-wrap .btn-confirm");
+  btn.disabled = true; btn.textContent = "Enviando…";
+
+  const formData = new FormData();
+  formData.append("_subject", `Contato PIP: ${assunto} – ${nome}`);
+  formData.append("Nome", nome);
+  formData.append("E-mail", email);
+  if(tel) formData.append("Telefone", tel);
+  formData.append("Assunto", assunto);
+  formData.append("Mensagem", msg);
+
+  try {
+    const r = await fetch("https://formspree.io/f/mbdvkjqj", {
+      method: "POST", body: formData, headers: { "Accept": "application/json" }
+    });
+    if(r.ok) {
+      document.getElementById("contact-form-wrap").style.display = "none";
+      document.getElementById("contact-success").classList.add("visible");
+      setTimeout(closeContactModal, 3000);
+    } else {
+      btn.disabled = false; btn.textContent = "Enviar mensagem";
+      alert("Erro ao enviar. Tente novamente.");
+    }
+  } catch(e) {
+    btn.disabled = false; btn.textContent = "Enviar mensagem";
+    alert("Erro de conexão. Tente novamente.");
+  }
+}
 </script>
 </body>
 </html>
