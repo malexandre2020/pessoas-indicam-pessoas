@@ -120,7 +120,7 @@
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; }
 
   /* PROFESSIONAL CARD */
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; box-shadow: var(--shadow); transition: box-shadow .15s, border-color .15s; display: flex; flex-direction: column; gap: 10px; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1rem; box-shadow: var(--shadow); transition: box-shadow .15s, border-color .15s; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
   .card:hover { box-shadow: var(--shadow-md); border-color: var(--border-strong); }
   .card-top { display: flex; align-items: flex-start; gap: 10px; }
   .avatar { width: 42px; height: 42px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 600; letter-spacing: -.5px; }
@@ -928,7 +928,7 @@ function filterEmp() {
     const digits = (e.phone||"").replace(/\D/g,"");
     const rid = slugify(e.name); const rv = getRating(rid);
     return `<article class="card" role="listitem">
-      ${e.logo ? `<div style="margin:-1rem -1rem .85rem;border-radius:8px 8px 0 0;overflow:hidden;background:#fff;height:80px;display:flex;align-items:center;justify-content:center;"><img src="${e.logo}" alt="${e.name}" style="max-width:100%;max-height:78px;object-fit:contain;pointer-events:none;display:block;"></div>` : ""}
+      ${e.logo ? `<img src="${e.logo}" alt="${e.name}" style="display:block;width:calc(100% + 2rem);max-width:calc(100% + 2rem);height:80px;object-fit:contain;background:#fff;border-radius:8px 8px 0 0;margin:-1rem -1rem .85rem -1rem;">` : ""}
       <div class="card-top">
         ${e.logo ? `` : `<div class="avatar" style="background:${av.bg};color:${av.text}">${initials(e.name)}</div>`}
         <div class="card-meta">
