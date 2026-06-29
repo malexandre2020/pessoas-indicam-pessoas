@@ -697,18 +697,6 @@ function submitForm(e, type) {
   succ.scrollIntoView({behavior:"smooth",block:"center"});
 }
 
-/* ── INIT ── */
-(function init() {
-  const servCats = [...new Set(PROFESSIONALS.map(p=>p.cat))];
-  const medCats  = [...new Set(DOCTORS.map(d=>d.spec))];
-  document.getElementById("stat-total").textContent = PROFESSIONALS.length;
-  document.getElementById("stat-cats").textContent  = servCats.length;
-  document.getElementById("stat-med-total").textContent = DOCTORS.length;
-  document.getElementById("stat-med-cats").textContent  = medCats.length;
-  renderServCats(); filterServ();
-  renderMedCats();
-})();
-
 /* ── RATINGS (JSONBin.io — compartilhado entre todos os visitantes) ── */
 const JSONBIN_ID  = "6a41cf8eda38895dfe0daa17";
 const JSONBIN_KEY = "$2a$10$OWfq4s3el1vzEdgGvjmPMuczcrrLxYlbOSbnlfO9sARLB7FJ2FEGS";
@@ -789,7 +777,17 @@ function updateModalStars(v){
 }
 
 document.addEventListener("DOMContentLoaded", function(){
-  // Carrega avaliações assim que a página abre e re-renderiza os cards
+  // Init stats and categories
+  const servCats = [...new Set(PROFESSIONALS.map(p=>p.cat))];
+  const medCats  = [...new Set(DOCTORS.map(d=>d.spec))];
+  document.getElementById("stat-total").textContent = PROFESSIONALS.length;
+  document.getElementById("stat-cats").textContent  = servCats.length;
+  document.getElementById("stat-med-total").textContent = DOCTORS.length;
+  document.getElementById("stat-med-cats").textContent  = medCats.length;
+  renderServCats();
+  renderMedCats();
+  // Render cards immediately with empty ratings, then reload once JSONBin responds
+  filterServ();
   loadRatings().then(() => {
     if(currentSection==="serv") filterServ(); else filterMed();
   });
