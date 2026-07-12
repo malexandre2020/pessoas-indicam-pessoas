@@ -653,7 +653,7 @@ const PROFESSIONALS = [
   { name:"Wash Service Lavanderia", service:"Lavanderia completa", phone:"(11) 99599-6260 / (11) 2283-6289", cat:"Lavanderia" },
   { name:"Talita – Bolos", service:"Bolos sob encomenda", phone:"(11) 97370-2908", cat:"Alimentação" },
   { name:"Reginaldo – Carreto/Mudanças", service:"Carreto e mudanças", phone:"(11) 96562-0505", cat:"Transporte" },
-  { name:"Caio – Carreto/Mudanças", service:"Carreto e mudanças", phone:"(11) 98565-1307", cat:"Transporte" },
+  { name:"Caio – Carreto/Mudanças", service:"Carreto e mudanças", phone:"(11) 98565-1307", cat:"Transporte", email:"caio_cesar21@hotmail.com" },
   { name:"Betel Ambulância Particular", service:"Ambulância particular – Av. Gen. Ataliba Leonel, 1670 – Carandiru, São Paulo", phone:"(11) 2262-2093", cat:"Saúde", site:"https://ambulanciabetel.com.br/" },
 ];
 
@@ -830,7 +830,7 @@ function filterServ() {
     return `<article class="card" role="listitem">
       <div class="card-top">
         <div class="avatar" style="background:${av.bg};color:${av.text}">${initials(p.name)}</div>
-        <div class="card-meta"><div class="card-name">${p.name}</div><div class="card-service">${p.service}</div>${p.site?`<a href="${p.site}" target="_blank" rel="noopener" style="font-size:11px;color:var(--accent);display:inline-flex;align-items:center;gap:4px;text-decoration:none;font-weight:500;margin-top:3px"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Site</a>`:""}</div>
+        <div class="card-meta"><div class="card-name">${p.name}</div><div class="card-service">${p.service}</div>${p.site?`<a href="${p.site}" target="_blank" rel="noopener" style="font-size:11px;color:var(--accent);display:inline-flex;align-items:center;gap:4px;text-decoration:none;font-weight:500;margin-top:3px"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Site</a>`:""} ${p.email?`<a href="mailto:${p.email}" style="font-size:11px;color:#185FA5;display:inline-flex;align-items:center;gap:4px;text-decoration:none;font-weight:500;margin-top:3px"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="#185FA5" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>E-mail</a>`:""}</div>
         <span class="cat-tag" style="background:${cc.bg};color:${cc.text}">${p.cat}</span>
       </div>
       <div class="stars-row">
