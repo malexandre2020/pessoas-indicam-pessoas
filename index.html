@@ -690,7 +690,7 @@ const DOCTORS = [
   { name:"Dra. Rachele Tamika Petrizzo", spec:"Gastroenterologia", phones:["(11) 3172-6800"], address:"R. Voluntários da Pátria, 3997 – Santana – São Paulo", extra:"Atende nos consultórios do Hospital São Camilo" },
   { name:"Dra. Heidi Feitoza", spec:"Vascular", phones:["(11) 5052-5222","(11) 95856-0186"], address:"Rua Vergueiro, 2045 – Conj. 804 – Vila Mariana – São Paulo", extra:"Cirurgiã Vascular com título de especialista pela SBACV · draheidifeitoza.com" },
   { name:"IPOE", spec:"Oftalmologia", phones:["(11) 94194-7481"], address:"", extra:"" },
-  { name:"Dra. Ana Paula Sinelli & Dra. Eliana Monteiro", spec:"Oftalmologia", phones:["(11) 2953-9529","(11) 2959-3040","(11) 99607-3754"], address:"Av. Nova Cantareira, 2025 – Cj 105/106 – 10º Andar – Tucuruvi – SP", extra:"Oftalmologia e Acupuntura" },
+  { name:"Dra. Ana Paula Sinelli & Dra. Eliana Monteiro", spec:"Oftalmologia", phones:["(11) 2953-9529","(11) 2959-3040","(11) 99607-3754"], whatsapp:"(11) 99607-3754", address:"Av. Nova Cantareira, 2025 – Cj 105/106 – 10º Andar – Tucuruvi – SP", extra:"Oftalmologia e Acupuntura" },
   { name:"Dr. Fernando Freua", spec:"Neurologia", phones:["(11) 99995-0433","(11) 3287-3247"], address:"R. Cubatão, 86 – Conjunto 409 – Vila Mariana – São Paulo", extra:"Neurologista pela USP. Atende no Hospital das Clínicas, Beneficência Portuguesa e Sírio-Libanês." },
   { name:"Dra. Flávia Lima", spec:"Neurologia", phones:["(11) 99350-6079"], address:"", extra:"Neuropediatra · CRM-SP 152.824" },
   { name:"Dr. Sidney Gomes", spec:"Neurologia", phones:["(11) 3505-1000","(11) 3505-5061"], address:"Rua Cap. Mor Roque Barreto, 47 – 1º Andar Sala 9 – Bela Vista – SP", extra:"CRM 77682 · Hospital Beneficência Portuguesa" },
@@ -882,7 +882,8 @@ function filterMed() {
   grid.innerHTML = filtered.map((d,i) => {
     const sc = SPEC_COLORS[d.spec]||{bg:"#E6F1FB",text:"#185FA5"};
     const primaryPhone = d.phones[0]||"";
-    const primaryDigits = primaryPhone.replace(/\D/g,"");
+    const wppPhone = d.whatsapp || primaryPhone;
+    const primaryDigits = wppPhone.replace(/\D/g,"");
     const extraPhones = d.phones.slice(1);
     const rid = slugify(d.name); const rv = getRating(rid);
     return `<article class="doc-card" role="listitem">
